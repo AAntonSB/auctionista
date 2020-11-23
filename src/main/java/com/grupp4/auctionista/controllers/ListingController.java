@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/rest/v1/listings")
@@ -25,4 +26,10 @@ public class ListingController {
     public ResponseEntity<Listing> saveUser(@Validated @RequestBody Listing listing) {
         return ResponseEntity.ok(listingService.save(listing));
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteListing(@PathVariable UUID id){
+        listingService.deleteListing(id);
+    }
+
 }

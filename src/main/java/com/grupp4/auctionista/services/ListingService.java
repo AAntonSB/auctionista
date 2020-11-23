@@ -9,6 +9,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ListingService {
@@ -23,4 +24,9 @@ public class ListingService {
     public Listing save(Listing listing) {
         return listingRepo.save(listing);
     }
+
+    public void deleteListing(UUID id) {
+        listingRepo.deleteById(id);
+    }
+    
 }
