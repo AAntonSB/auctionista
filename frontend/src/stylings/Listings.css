@@ -20,6 +20,7 @@
   height: 90%;
   box-shadow: none;
   background-color: #AFD0BF;
+  overflow: scroll;
 }
 Input{
 border-radius: 5px;

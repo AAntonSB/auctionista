@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.UUID;
 
 
@@ -24,5 +25,6 @@ public class Listing {
     private String description;
     private int reservedPrice;
     private int startingBid;
+    private String endDate;
 
 }
