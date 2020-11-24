@@ -16,19 +16,19 @@ const ListingUpload = (props) => {
  // const {appendListing} = useContext(ListingContextProvider);
 
    const submitListing = async (e) => {
-    let endTime = new Date(Date.now() + numberOfDays * 24 * 60 * 60 * 1000)
+    let endDate = new Date(Date.now() + numberOfDays * 24 * 60 * 60 * 1000)
       .toISOString()
       .replace(/T/, " ")
       .replace(/\..+/, "");
 
-    console.log(endTime);
+    console.log(endDate);
 
     const credentials = {
       title: title,
       description: description,
       reservedPrice: reservedPrice,
       startingBid: startingBid,
-      endTime: endTime,
+      endDate: endDate,
     };
 
     console.log(credentials);
