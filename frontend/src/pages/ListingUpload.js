@@ -15,10 +15,12 @@ const ListingUpload = (props) => {
  // const {appendListing} = useContext(ListingContextProvider);
 
    const submitListing = async (e) => {
-    let endDate = new Date(Date.now() + numberOfDays * 24 * 60 * 60 * 1000)
-      .toISOString()
-      .replace(/T/, " ")
-      .replace(/\..+/, "");
+    let endDate = Date.now() + numberOfDays * 24 * 60 * 60 * 1000;
+    
+    // )
+    //   .toISOString()
+    //   .replace(/T/, " ")
+    //   .replace(/\..+/, "");
 
     console.log(endDate);
 
@@ -136,7 +138,7 @@ const ListingUpload = (props) => {
               {optionsArray()}
             </Input>
           </FormGroup>
-          <Button color="secondary" onClick={submitListing}>
+          <Button color="primary" onClick={submitListing}>
             Upload Listing
           </Button>
         </Form>

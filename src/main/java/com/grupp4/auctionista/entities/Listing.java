@@ -25,6 +25,6 @@ public class Listing {
     private String description;
     private int reservedPrice;
     private int startingBid;
-    private String endDate;
+    private Long endDate;
 
 }

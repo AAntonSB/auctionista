@@ -24,7 +24,7 @@
   width: 65vw;
   /* height: 90%; */
   box-shadow: none;
-  background-color: #0ea859;
+  background-color: #7a7a7a;
 }
 Input{
 border-radius: 5px;
@@ -34,7 +34,7 @@ Label{
   align-self: flex-start;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: bold;
-  color: rgb(78, 78, 78);
+  color: rgb(61, 61, 61);
 }
 #listing-form{
   margin-top: 50px;
