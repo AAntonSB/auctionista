@@ -3,43 +3,53 @@ export const ListingContext = createContext();
 
 const ListingContextProvider = (props) => {
 
-  const [listings, setListings] = useState([]);
+  const [listingList, setListings] = useState([]);
 
   const appendListing = (listing) => {
 
-    setListings([...listings, listing])
+    setListings([...listingList, listing])
   }
 
-  const uploadListing = async (e, listing) => {
-    e.preventDefault();
-
-    // const credentials = {
-    //   email: email,
-    //   full_name: fullName,
-    //   password: password,
-    //   phone_number: parseInt(phoneNumber),
-    // };
-
-    // console.log(credentials);
-    let response = await fetch("/rest/v1", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(listing),
-    });
-
-    try {
-      response = await response.json();
-      appendListing(response);
-    } catch {
-      console.log("Bad credentials");
-    }
+  const updateListings = (updates) => {
+    setListings(listingList.concat(updates));
   };
+
+   const fetchAllListings = async () => {
+     let listings = await fetch("rest/v1/listings");
+     listings = await listings.json();
+
+     updateListings(listings);
+   };
+
+  // const uploadListing = async (e, listing) => {
+  //   e.preventDefault();
+
+  //   // const credentials = {
+  //   //   email: email,
+  //   //   full_name: fullName,
+  //   //   password: password,
+  //   //   phone_number: parseInt(phoneNumber),
+  //   // };
+
+  //   // console.log(credentials);
+  //   let response = await fetch("/rest/v1", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(listing),
+  //   });
+
+  //   try {
+  //     response = await response.json();
+  //     appendListing(response);
+  //   } catch {
+  //     console.log("Bad credentials");
+  //   }
+  // };
 
 
   const values = [
-    listings,
-    appendListing,
-    uploadListing
+    listingList,
+    appendListing
   ]
 
   return(

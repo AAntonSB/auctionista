@@ -1,7 +1,6 @@
-import { Button, Card } from "@material-ui/core";
 import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router";
-import { Form, Row, Col, Label, Input, FormGroup } from "reactstrap";
+import { Card, Button, Form, Row, Col, Label, Input, FormGroup } from "reactstrap";
 import ListingContextProvider from "../contexts/ListingContextProvider";
 import "../stylings/Listings.css";
 
@@ -44,14 +43,27 @@ const ListingUpload = (props) => {
       console.log("Bad credentials");
     }
   };
-  // const days = [];
+
+  
 
   // useEffect(() => {
-  //   for (var i = 1; i <= 31; i++) {
-  //     days.push(i);
-  //   }
 
+
+  //   console.log(days);
   // }, []);
+  // const selectOptions = days.map((day) => <option key={day.toString()}>{day}</option>);
+  const optionsArray = () => {
+    const days = [];
+        for (var i = 1; i <= 31; i++) {
+          days.push(
+            <option key={i} value={i}>
+              {i}
+            </option>
+          );
+        }
+        return days;
+  }
+
 
   return (
     <div id="listings-div">
@@ -116,22 +128,17 @@ const ListingUpload = (props) => {
           <FormGroup>
             <Label for="end-time-select">Choose end time</Label>
             <Input
-              type="select"
-              name="select"
+            type="select"
               id="end-time-select"
               value={numberOfDays}
               onChange={(e) => setNumberOfDays(e.target.value)}
             >
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
-              <option>7</option>
+              {optionsArray()}
             </Input>
           </FormGroup>
-          <Button onClick={submitListing}>Upload Listing</Button>
+          <Button color="secondary" onClick={submitListing}>
+            Upload Listing
+          </Button>
         </Form>
       </Card>
     </div>

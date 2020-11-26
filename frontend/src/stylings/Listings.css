@@ -1,9 +1,10 @@
 *{
   box-sizing: border-box;
 }
-/* body{
-  background-color: #808F87;
-} */
+ body{
+  /* background-color: #808F87; */
+  overflow: scroll;
+} 
 #listings-div{
   display: flex;
   justify-content: center;
@@ -11,16 +12,19 @@
   /* background-color: #808F87; */
 }
 #listing-upload{
+  position:absolute;
+  height:100%;
+  overflow:hidden; 
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin-top: 50px;
+   margin-top: 25px; 
+   margin-bottom: 25px;
   border-radius: 20px;
   width: 65vw;
-  height: 90%;
+  /* height: 90%; */
   box-shadow: none;
-  background-color: #AFD0BF;
-  overflow: scroll;
+  background-color: #0ea859;
 }
 Input{
 border-radius: 5px;
@@ -28,7 +32,12 @@ border-radius: 5px;
 Label{
   display:flex;
   align-self: flex-start;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  color: rgb(78, 78, 78);
 }
 #listing-form{
   margin-top: 50px;
+  margin-bottom: 50px;
+  margin: 70px; 
 }
