@@ -6,6 +6,7 @@ import MessageContext from "./contexts/MessageContextProvider";
 import ListingContext from "./contexts/ListingContextProvider";
 import PrintMessages from "./components/PrintMessages";
 import ListingUpload from "./pages/ListingUpload";
+import ListingDetails from "./components/ListingDetails";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
             <Switch>
               <Route exact path="/" component={PrintMessages} />
               <Route exact path="/upload-listing" component={ListingUpload} />
+              <Route exact path="/listing-details/:id" component={ListingDetails} />
             </Switch>
           </MessageContext>
         </ListingContext>

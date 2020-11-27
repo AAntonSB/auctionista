@@ -5,7 +5,7 @@
   /* background-color: #808F87; */
   overflow: scroll;
 } 
-#listings-div{
+.listings-div{
   display: flex;
   justify-content: center;
   height: 100vh; 
@@ -26,6 +26,21 @@
   box-shadow: none;
   background-color: #7a7a7a;
 }
+#listing-details{
+  position:absolute;
+  height:100%;
+  overflow:hidden; 
+  display: flex;
+  /* flex-wrap: wrap; */
+  align-items: flex-start;
+   margin-top: 25px; 
+   margin-bottom: 25px;
+  /* border-radius: 20px; */
+  width: 50vw;
+  /* height: 90%; */
+  box-shadow: none;
+  background-color: #99b1b3;
+}
 Input{
 border-radius: 5px;
 }
@@ -40,4 +55,7 @@ Label{
   margin-top: 50px;
   margin-bottom: 50px;
   margin: 70px; 
+}
+#details-text{
+  margin-left: 40px;
 }

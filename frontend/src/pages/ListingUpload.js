@@ -1,10 +1,12 @@
 import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router";
 import { Card, Button, Form, Row, Col, Label, Input, FormGroup } from "reactstrap";
-import ListingContextProvider from "../contexts/ListingContextProvider";
+import { ListingContext } from "../contexts/ListingContextProvider";
+import ListingDetails from "../components/ListingDetails";
 import "../stylings/Listings.css";
 
 const ListingUpload = (props) => {
+  const listingContext = useContext(ListingContext);
   const [title, setTitle] = useState([]);
   const [description, setDescription] = useState([]);
   const [reservedPrice, setReservedPrice] = useState([]);
@@ -41,9 +43,11 @@ const ListingUpload = (props) => {
 
     try {
       response = await response.json();
+      props.history.push('/listing-details/' + response.id)
     } catch {
       console.log("Bad credentials");
     }
+
   };
 
   
@@ -68,9 +72,9 @@ const ListingUpload = (props) => {
 
 
   return (
-    <div id="listings-div">
+    <div className="listings-div">
       <Card id="listing-upload">
-        <Form id="listing-form">
+        <Form id="listing-form" autoComplete="off">
           <Row>
             <Col md={6}>
               <FormGroup>

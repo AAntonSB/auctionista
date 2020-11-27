@@ -1,62 +1,72 @@
 import React, { createContext, useState } from "react";
 export const ListingContext = createContext();
 
-const ListingContextProvider = (props) => {
+const ListingContextProvider = (props) => { 
 
   const [listingList, setListings] = useState([]);
+  const [listing, setListing] = useState([]);
 
   const appendListing = (listing) => {
 
     setListings([...listingList, listing])
-  }
+  };
 
   const updateListings = (updates) => {
     setListings(listingList.concat(updates));
   };
 
    const fetchAllListings = async () => {
-     let listings = await fetch("rest/v1/listings");
+     let listings = await fetch("http://localhost:3000/rest/v1/listings");
      listings = await listings.json();
 
+     console.log(listings);
      updateListings(listings);
+     return listings; 
    };
 
-  // const uploadListing = async (e, listing) => {
-  //   e.preventDefault();
+   const setCurrentListing = (listing) => {
+     setListing(listing); 
+   }
 
-  //   // const credentials = {
-  //   //   email: email,
-  //   //   full_name: fullName,
-  //   //   password: password,
-  //   //   phone_number: parseInt(phoneNumber),
-  //   // };
+   const fetchOneListing =  async (id) => {
 
-  //   // console.log(credentials);
-  //   let response = await fetch("/rest/v1", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(listing),
-  //   });
+    let listing = await fetch("http://localhost:3000/rest/v1/listings/" + id);
+    listing = await listing.json();
 
-  //   try {
-  //     response = await response.json();
-  //     appendListing(response);
-  //   } catch {
-  //     console.log("Bad credentials");
-  //   }
-  // };
+  //  let listing = listingList.filter((l) => l.id ===id);
+     
+      // let listing = await fetch("http://localhost:3000/rest/v1/listings/" + id)
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     console.log(data);
+      //   })
+      //   .catch((error) => console.error(error));
+
+     // listing = await listing.json();
+
+      //setListing(listing);
+      console.log(listing)
+      return listing; 
+      
+
+   };
 
 
-  const values = [
+  const values = {
     listingList,
-    appendListing
-  ]
+    listing,
+    appendListing,
+    setCurrentListing,
+    fetchAllListings,
+    fetchOneListing,
+  };
 
   return(
     <ListingContext.Provider value={values}>
       {props.children}
     </ListingContext.Provider>
-  )
+  );
 
-}
+};
+
 export default ListingContextProvider;

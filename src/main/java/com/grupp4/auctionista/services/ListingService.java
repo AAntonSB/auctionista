@@ -21,6 +21,11 @@ public class ListingService {
         return listingRepo.findAll();
     }
 
+    public Listing getListingById(UUID id){
+        return listingRepo.findById(id).orElseThrow(() ->
+                new ResponseStatusException(HttpStatus.NOT_FOUND, "Could not find the listing"));
+    }
+
     public Listing save(Listing listing) {
         return listingRepo.save(listing);
     }
@@ -28,5 +33,5 @@ public class ListingService {
     public void deleteListing(UUID id) {
         listingRepo.deleteById(id);
     }
-    
+
 }

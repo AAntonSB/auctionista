@@ -22,6 +22,10 @@ public class ListingController {
         return listingService.getAllListings();
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Listing> findListingById(@PathVariable UUID id) {
+        return ResponseEntity.ok(listingService.getListingById(id));
+    }
     @PostMapping
     public ResponseEntity<Listing> saveUser(@Validated @RequestBody Listing listing) {
         return ResponseEntity.ok(listingService.save(listing));
