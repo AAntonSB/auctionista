@@ -1,12 +1,15 @@
 import React, { useState } from "react";
+import "../css/RegisterModalCss.css";
+import eye from "../svgs/eye.svg";
 
 const LoginModal = () => {
   const [togglePassoword, setTogglePassword] = useState();
-  const [passwordInput, setPasswordInput] = useState();
+  const [passwordInput, setPasswordInput] = useState("password");
   const [togglePasswordButton, setTogglePasswordButton] = useState({});
 
   const TogglePassword = () => {
-    if (passwordInput.type === "password") {
+    if (passwordInput === "password") {
+      console.log("working");
       setPasswordInput("text");
       // togglePasswordButton.textContent = "Hide password";
       setTogglePasswordButton("Hide password");
@@ -43,15 +46,27 @@ const LoginModal = () => {
         <label for="password" type="password">
           password
         </label>
-        <input
-          id="password"
-          type={passwordInput}
-          name="new-password"
-          autocomplete="new-password"
-          aria-label={togglePasswordButton}
-          aria-describedby="password-constraints"
-          required
-        />
+        <div className="passwordBox">
+          <input
+            id="password"
+            type={passwordInput}
+            name="new-password"
+            autocomplete="new-password"
+            aria-label={togglePasswordButton}
+            aria-describedby="password-constraints"
+            required
+          />
+          <div className="togglePasswordBorder" style={{ display: "inline" }}>
+            <img
+              style={{ verticalAlign: "middle" }}
+              className="togglePasswordBtn"
+              onClick={() => TogglePassword}
+              src={eye}
+              height="25px"
+              alt="Show password"
+            />
+          </div>
+        </div>
         <div id="password-constraints">
           8+ Characters with a mix of letters, numbers and symbols
         </div>
