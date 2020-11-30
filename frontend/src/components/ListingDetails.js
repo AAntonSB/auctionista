@@ -22,18 +22,6 @@ const ListingDetails = (props) => {
        );
      }
 
-
-
-  // useEffect(async () => {
-  //   setListing(await listingContext.fetchOneListing(id));
-  //   console.log(await listingContext.fetchOneListing(id));
-  // },[listingContext.listingList])
-
-//  const test = async () => {
-//    setListing(await listingContext.fetchOneListing(props.match.params.id));
-   
-//  };
-
 useEffect(()=> {
   console.log(listing)
 },[listing])
