@@ -4,6 +4,7 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import MessageContext from "./contexts/MessageContextProvider";
 import PrintMessages from "./components/PrintMessages";
+import LoginModal from "./components/LoginModal";
 
 function App() {
   return (
@@ -11,7 +12,7 @@ function App() {
       <div className="App">
         <MessageContext>
           <Switch>
-            <Route exact path="/" component={PrintMessages} />
+            <Route exact path="/" component={LoginModal} />
           </Switch>
         </MessageContext>
       </div>
