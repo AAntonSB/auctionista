@@ -7,6 +7,7 @@ import ListingContext from "./contexts/ListingContextProvider";
 import PrintMessages from "./components/PrintMessages";
 import ListingUpload from "./pages/ListingUpload";
 import ListingDetails from "./components/ListingDetails";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <div className="App">
         <ListingContext>
           <MessageContext>
+            <SearchBar></SearchBar>
             <Switch>
               <Route exact path="/" component={PrintMessages} />
               <Route exact path="/upload-listing" component={ListingUpload} />
