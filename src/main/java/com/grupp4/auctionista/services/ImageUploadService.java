@@ -32,9 +32,10 @@ public class ImageUploadService {
         }
     }
 
-    public List<String> handleFileUpload(List<MultipartFile> files, String owner) {
+    public List<Image> handleFileUpload(List<MultipartFile> files, UUID owner) {
         final List<String> supportedFileExtensions = List.of(".png,.jpg,.jpeg,.gif,.bmp,.jfif".split(","));
         List<String> resultingFilepaths = new ArrayList<>();
+        List<Image> resultingImages = new ArrayList<>();
 
         for (MultipartFile file : files) {
             String fileExt = file.getOriginalFilename().toLowerCase();
@@ -56,10 +57,12 @@ public class ImageUploadService {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-            var tempImage = new Image(owner, newFileName);
-            imageRepo.save(tempImage);
+
+            var temporaryImage = imageRepo.save(new Image(owner, newFileName));
+            resultingImages.add(temporaryImage);
+
         }
 
-        return resultingFilepaths;
+        return resultingImages;
     }
 }

@@ -11,8 +11,58 @@ const ListingUpload = (props) => {
   const [image, setImage] = useState([]);
   const [startingBid, setStartingBid] = useState([]);
   const [numberOfDays, setNumberOfDays] = useState();
+  const [file, setFile] = useState();
+  const [picture, setPicture] = useState({});
+
+  const uploadPicture = e => {
+    setImage(e.target.value)
+    setPicture({
+      
+      /* contains the preview, if you want to show the picture to the user
+           you can access it with this.state.currentPicture
+       */
+      picturePreview: URL.createObjectURL(e.target.files[0]),
+      /* this contains the file we want to send */
+      pictureAsFile: e.target.files[0]
+    });
+  };
 
  // const {appendListing} = useContext(ListingContextProvider);
+
+ const secondstringtest = async event => {
+   event.preventDefault();
+   let endDate = Date.now() + numberOfDays * 24 * 60 * 60 * 1000;
+
+   const credentials = {
+    title: title,
+    description: description,
+    reservedPrice: reservedPrice,
+    startingBid: startingBid,
+    endDate: endDate,
+  };
+
+
+  const myjson = JSON.stringify(credentials);
+  const blob = new Blob([myjson], {
+    type: 'application/json'
+    });
+   const formData = new FormData();
+
+   formData.append('listing', blob);
+   formData.append("images", picture.pictureAsFile);
+
+   const data = await fetch("http://localhost:4037/rest/v1/listings/tripple", {
+    method: "post",
+    //headers: { "Content-Type": "multipart/form-data" },
+    body: formData
+  });
+  const uploadedImage = await data.json();
+  if (uploadedImage) {
+    console.log("Successfully uploaded image");
+  } else {
+    console.log("Error Found");
+  }
+ }
 
    const submitListing = async (e) => {
     let endDate = Date.now() + numberOfDays * 24 * 60 * 60 * 1000;
@@ -45,9 +95,7 @@ const ListingUpload = (props) => {
       console.log("Bad credentials");
     }
   };
-
   
-
   // useEffect(() => {
 
 
@@ -79,8 +127,11 @@ const ListingUpload = (props) => {
                   type="file"
                   name="file"
                   id="item-image-upload"
+                  multiple
                   value={image}
-                  onChange={(e) => setImage(e.target.value)}
+                  onChange={uploadPicture}
+                  //onChange={(e) => fileSelectHandler(e)}
+                  //onChange={(e) => fileSelectHandler(e)}
                 />
               </FormGroup>
             </Col>
@@ -138,7 +189,7 @@ const ListingUpload = (props) => {
               {optionsArray()}
             </Input>
           </FormGroup>
-          <Button color="primary" onClick={submitListing}>
+          <Button color="primary" onClick={secondstringtest}>
             Upload Listing
           </Button>
         </Form>
@@ -147,3 +198,4 @@ const ListingUpload = (props) => {
   );
 };
 export default withRouter(ListingUpload);
+//onClick={submitListing}>
