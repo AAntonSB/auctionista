@@ -65,5 +65,8 @@ Label{
 }
 
 #search-bar-form{
-  width: 50%;
+  width: 70%;
+}
+#search-button{
+  height: 38px;
 }
