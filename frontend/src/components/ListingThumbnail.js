@@ -3,12 +3,21 @@ import {} from "reactstrap";
 import "../css/thumbnail.css";
 
 const ListingThumbnail = (props) => {
+   
   useEffect(()=>{
-    console.log(((props.listing.endDate - new Date())/ (24*60*60*1000)));
+    console.log((Math.round((props.listing.endDate - new Date())/ (24*60*60*1000))));
   },[]);
 
-  const calcRemainingTime = () =>{
-    let remainignTime = props.listing.endDate - new Date())/ (24*60*60*1000); 
+  const remainigTime = () =>{
+    let daysLeft =  (props.listing.endDate - new Date())/ (24*60*60*1000); 
+     let time = 0;
+    if(Math.trunc(daysLeft)>0){
+      time =  Math.round(daysLeft);
+    }else if(Math.trunc(daysLeft<0)){
+
+      console.log("Less than one day left")
+    }
+    return time; 
   }
 
 
@@ -27,7 +36,7 @@ const ListingThumbnail = (props) => {
           50 kr
         </span>
         <span className="myInline myAlignLeft">3 bud</span>
-        <span className="myInline myAlignRight"> 4 min</span>
+        <span className="myInline myAlignRight">{remainigTime()} days left</span>
       </div>
     </>
   );
