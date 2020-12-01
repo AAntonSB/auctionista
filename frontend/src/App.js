@@ -4,7 +4,7 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import MessageContext from "./contexts/MessageContextProvider";
 import PrintMessages from "./components/PrintMessages";
-import LoginModal from "./components/LoginModal";
+import LoginModal from "./components/RegisterModal";
 
 function App() {
   return (

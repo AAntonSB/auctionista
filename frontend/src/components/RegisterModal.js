@@ -1,27 +1,10 @@
 import React, { useState } from "react";
 import "../css/RegisterModalCss.css";
-import eye from "../svgs/eye.svg";
 
 const LoginModal = () => {
   const [togglePassoword, setTogglePassword] = useState();
   const [passwordInput, setPasswordInput] = useState("password");
   const [togglePasswordButton, setTogglePasswordButton] = useState({});
-
-  const TogglePassword = () => {
-    if (passwordInput === "password") {
-      console.log("working");
-      setPasswordInput("text");
-      // togglePasswordButton.textContent = "Hide password";
-      setTogglePasswordButton("Hide password");
-    } else {
-      setPasswordInput("password");
-      // togglePasswordButton.textContent = "Show password";
-      setTogglePasswordButton(
-        "Show password as plain text." +
-          "Warning: this will display your password on the screen"
-      );
-    }
-  };
 
   return (
     <form>
@@ -34,12 +17,13 @@ const LoginModal = () => {
           autocomplete="email"
           autoFocus
           required
+          className="inputFit"
         />
       </section>
 
       <section>
         <label for="username">User name</label>
-        <input id="username" name="username" required />
+        <input id="username" name="username" required className="inputFit" />
       </section>
 
       <section>
@@ -55,17 +39,8 @@ const LoginModal = () => {
             aria-label={togglePasswordButton}
             aria-describedby="password-constraints"
             required
+            className="inputFit passFitterLeft"
           />
-          <div className="togglePasswordBorder" style={{ display: "inline" }}>
-            <img
-              style={{ verticalAlign: "middle" }}
-              className="togglePasswordBtn"
-              onClick={() => TogglePassword}
-              src={eye}
-              height="25px"
-              alt="Show password"
-            />
-          </div>
         </div>
         <div id="password-constraints">
           8+ Characters with a mix of letters, numbers and symbols
@@ -81,6 +56,7 @@ const LoginModal = () => {
           aria-label={togglePasswordButton}
           autocomplete="new-password"
           required
+          className="inputFit"
         />
       </section>
 

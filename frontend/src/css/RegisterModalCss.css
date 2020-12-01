@@ -1,7 +1,8 @@
 .passwordBox {
+  height: 21.25px;
+}
+
+.inputFit {
   height: auto;
 }
 
-.togglePasswordBorder {
-  border-left: none;
-}
