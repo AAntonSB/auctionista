@@ -1,0 +1,33 @@
+*{
+  box-sizing: border-box;
+}
+/* body{
+  background-color: #808F87;
+} */
+#listings-div{
+  display: flex;
+  justify-content: center;
+  height: 100vh; 
+  /* background-color: #808F87; */
+}
+#listing-upload{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 50px;
+  border-radius: 20px;
+  width: 65vw;
+  height: 90%;
+  box-shadow: none;
+  background-color: #AFD0BF;
+}
+Input{
+border-radius: 5px;
+}
+Label{
+  display:flex;
+  align-self: flex-start;
+}
+#listing-form{
+  margin-top: 50px;
+}
