@@ -63,11 +63,12 @@ public class ListingController {
         //System.out.println(listingService.getById(newlisting.getId()));
 
     }
-
+    /*
     @GetMapping("/{id}")
     public Optional<Listing> getOneListing(@PathVariable UUID id){
         return listingService.getById(id);
     }
+     */
 
 
     @DeleteMapping("/{id}")

@@ -33,10 +33,9 @@ public class ListingService {
     public void deleteListing(UUID id) {
         listingRepo.deleteById(id);
     }
-
-
+    
     public Optional<Listing> getById(UUID id) {
         return listingRepo.findById(id);
     }
-    
+
 }
