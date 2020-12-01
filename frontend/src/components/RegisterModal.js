@@ -3,16 +3,15 @@ import "../css/RegisterModalCss.css";
 import { Modal } from "reactstrap";
 
 const LoginModal = () => {
-  const [togglePassoword, setTogglePassword] = useState();
-  const [passwordInput, setPasswordInput] = useState("password");
-  const [togglePasswordButton, setTogglePasswordButton] = useState({});
-
   return (
-    <div className="screen" id="HEJ">
+    <div className="screen">
       <Modal isOpen={true} className="ModalMoves" autoFocus={false}>
         <form>
+          <h1>Register</h1>
           <section>
-            <label for="email">Email</label>
+            <label for="email" className="block-label">
+              Email
+            </label>
             <input
               id="email"
               type="email"
@@ -25,7 +24,9 @@ const LoginModal = () => {
           </section>
 
           <section>
-            <label for="username">User name</label>
+            <label for="username" className="block-label">
+              User name
+            </label>
             <input
               id="username"
               name="username"
@@ -41,13 +42,11 @@ const LoginModal = () => {
             <div className="passwordBox">
               <input
                 id="password"
-                type={passwordInput}
+                type="password"
                 name="new-password"
                 autocomplete="new-password"
-                aria-label={togglePasswordButton}
                 aria-describedby="password-constraints"
                 required
-                className="inputFit passFitterLeft"
               />
             </div>
             <div
@@ -59,12 +58,13 @@ const LoginModal = () => {
           </section>
 
           <section>
-            <label for="confirmPassword">Confirm password</label>
+            <label for="confirmPassword" className="block-label">
+              Confirm password
+            </label>
             <input
               id="confirmPassword"
-              type={passwordInput}
+              type="password"
               name="new-password"
-              aria-label={togglePasswordButton}
               autocomplete="new-password"
               required
               className="inputFit"
@@ -72,6 +72,7 @@ const LoginModal = () => {
           </section>
 
           <button>Create account</button>
+          <p className="login-route">Already have an account? click me! </p>
         </form>
       </Modal>
     </div>
