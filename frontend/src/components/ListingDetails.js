@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router";
 import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
 import {ListingContext} from "../contexts/ListingContextProvider";
-import "../stylings/Listings.css"
+import "../css/Listings.css"
 
 const ListingDetails = (props) => {
  const listingContext = useContext(ListingContext);
