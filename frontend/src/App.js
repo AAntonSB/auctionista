@@ -13,7 +13,7 @@ function App() {
       <div className="App">
         <MessageContext>
           <Switch>
-            <Route exact path="/" component={LoginModal} />
+            <Route exact path="/" component={RegisterModal} />
           </Switch>
         </MessageContext>
       </div>
