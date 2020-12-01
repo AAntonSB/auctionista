@@ -15,7 +15,7 @@ function App() {
         <MessageContext>
           <Header />
           <Switch>
-            <Route exact path="/" component={RegisterModal} />
+            <Route exact path="/" />
           </Switch>
         </MessageContext>
       </div>

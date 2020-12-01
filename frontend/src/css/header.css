@@ -37,18 +37,18 @@
   height: 100%;
 }
 
-.navigation a {
+.navigation .navlink {
   height: 100%;
   display: table;
   float: left;
   padding: 0px 20px;
 }
 
-.navigation a:last-child {
+.navigation .navlink:last-child {
   padding-right: 0;
 }
 
-.navigation a li {
+.navigation .navlink li {
   display: table-cell;
   vertical-align: middle;
   height: 100%;

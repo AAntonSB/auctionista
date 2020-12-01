@@ -1,5 +1,7 @@
 import React from "react";
+import { NavLink } from "reactstrap";
 import "../css/header.css";
+import LoginModal from "./LoginModal";
 
 const Header = () => {
   return (
@@ -7,23 +9,28 @@ const Header = () => {
       <div className="inner-header">
         <div className="logo-container">
           <h1>
-            <span>The</span> Auctionista
+            <NavLink
+              href="/"
+              style={{ textDecoration: "none", color: "white" }}
+            >
+              <span>The</span> Auctionista
+            </NavLink>
           </h1>
         </div>
 
         <ul className="navigation">
-          <a>
+          <NavLink href="/" className="navlink">
             <li>Home</li>
-          </a>
-          <a>
+          </NavLink>
+          <NavLink href="/about" className="navlink">
             <li>About</li>
-          </a>
-          <a>
-            <li>My page</li>
-          </a>
-          <a>
-            <li>Contact</li>
-          </a>
+          </NavLink>
+          <span className="navlink">
+            <li>Login</li>
+          </span>
+          <span className="navlink">
+            <li>Register</li>
+          </span>
         </ul>
       </div>
     </div>
