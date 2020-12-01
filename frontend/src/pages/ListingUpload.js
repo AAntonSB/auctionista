@@ -2,7 +2,7 @@ import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router";
 import { Card, Button, Form, Row, Col, Label, Input, FormGroup } from "reactstrap";
 import { ListingContext } from "../contexts/ListingContextProvider";
-import ListingDetails from "../components/ListingDetails";
+//import ListingDetails from "../components/ListingDetails";
 import "../stylings/Listings.css";
 
 const ListingUpload = (props) => {
@@ -13,7 +13,7 @@ const ListingUpload = (props) => {
   const [image, setImage] = useState([]);
   const [startingBid, setStartingBid] = useState([]);
   const [numberOfDays, setNumberOfDays] = useState(1);
-  const [file, setFile] = useState();
+  //const [file, setFile] = useState();
   const [picture, setPicture] = useState({});
 
   const uploadPicture = e => {
@@ -31,7 +31,7 @@ const ListingUpload = (props) => {
 
  // const {appendListing} = useContext(ListingContextProvider);
 
- const secondstringtest = async event => {
+ const submitListing = async event => {
    event.preventDefault();
    let endDate = Date.now() + numberOfDays * 24 * 60 * 60 * 1000;
 
@@ -54,57 +54,19 @@ const ListingUpload = (props) => {
 
    const data = await fetch("http://localhost:4037/rest/v1/listings/tripple", {
     method: "post",
-    //headers: { "Content-Type": "multipart/form-data" },
     body: formData
   });
+  /*
   const uploadedImage = await data.json();
   if (uploadedImage) {
     console.log("Successfully uploaded image");
   } else {
     console.log("Error Found");
   }
+  */
  }
 
-   const submitListing = async (e) => {
-    let endDate = Date.now() + numberOfDays * 24 * 60 * 60 * 1000;
-    
-    // )
-    //   .toISOString()
-    //   .replace(/T/, " ")
-    //   .replace(/\..+/, "");
-
-    console.log(endDate);
-
-    const credentials = {
-      title: title,
-      description: description,
-      reservedPrice: reservedPrice,
-      startingBid: startingBid,
-      endDate: endDate,
-    };
-
-    console.log(credentials);
-    let response = await fetch("/rest/v1/listings", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(credentials),
-    });
-
-    try {
-      response = await response.json();
-      props.history.push('/listing-details/' + response.id)
-    } catch {
-      console.log("Bad credentials");
-    }
-
-  };
   
-  // useEffect(() => {
-
-
-  //   console.log(days);
-  // }, []);
-  // const selectOptions = days.map((day) => <option key={day.toString()}>{day}</option>);
   const optionsArray = () => {
     const days = [];
         for (var i = 1; i <= 31; i++) {
@@ -192,7 +154,7 @@ const ListingUpload = (props) => {
               {optionsArray()}
             </Input>
           </FormGroup>
-          <Button color="primary" onClick={secondstringtest}>
+          <Button color="primary" onClick={submitListing}>
             Upload Listing
           </Button>
         </Form>
