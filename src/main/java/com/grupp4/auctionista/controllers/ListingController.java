@@ -44,6 +44,8 @@ public class ListingController {
             @RequestPart Listing listing,
             @RequestPart List<MultipartFile> images){
         /*
+        WARNING: PK in DB needs to be INTEGER for this to work
+
         works with
         curl -X POST "http://localhost:4037/rest/v1/listings/double" -H  "accept: application/json;charset=UTF-8" -H  "Content-Type: multipart/form-data" -F "images=@./talgoxe.jpg;type=image/jpeg" -F "stringtest={\"first\":\"White\"};type=application/json;charset=utf-8"
         and

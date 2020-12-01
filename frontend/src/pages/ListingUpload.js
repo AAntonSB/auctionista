@@ -12,7 +12,7 @@ const ListingUpload = (props) => {
   const [reservedPrice, setReservedPrice] = useState([]);
   const [image, setImage] = useState([]);
   const [startingBid, setStartingBid] = useState([]);
-  const [numberOfDays, setNumberOfDays] = useState();
+  const [numberOfDays, setNumberOfDays] = useState(1);
   const [file, setFile] = useState();
   const [picture, setPicture] = useState({});
 
@@ -42,7 +42,6 @@ const ListingUpload = (props) => {
     startingBid: startingBid,
     endDate: endDate,
   };
-
 
   const myjson = JSON.stringify(credentials);
   const blob = new Blob([myjson], {
