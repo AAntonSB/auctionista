@@ -9,13 +9,17 @@ const ListingThumbnail = (props) => {
   },[]);
 
   const remainigTime = () =>{
-    let daysLeft =  (props.listing.endDate - new Date())/ (24*60*60*1000); 
-     let time = 0;
-    if(Math.trunc(daysLeft)>0){
-      time =  Math.round(daysLeft);
-    }else if(Math.trunc(daysLeft<0)){
-
-      console.log("Less than one day left")
+    let miliseconds = props.listing.endDate - new Date();
+    let seconds = miliseconds / 1000;
+    let minutes = seconds / 60;
+    let hours = minutes / 60;
+    let days =  hours/ 24; 
+    
+     let time = null;
+    if(Math.trunc(days)>=1){
+      time =  Math.round(days)  + " days left";
+    }else if (Math.trunc(days) < 1) {
+      time = Math.round(hours) + " hours left";
     }
     return time; 
   }
@@ -36,7 +40,7 @@ const ListingThumbnail = (props) => {
           50 kr
         </span>
         <span className="myInline myAlignLeft">3 bud</span>
-        <span className="myInline myAlignRight">{remainigTime()} days left</span>
+        <span className="myInline myAlignRight">{remainigTime()} </span>
       </div>
     </>
   );
