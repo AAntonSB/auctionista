@@ -9,6 +9,7 @@ import ListingUpload from "./pages/ListingUpload";
 import ListingDetails from "./components/ListingDetails";
 import listingThumbnail from "./components/ListingThumbnail";
 import Header from "./components/Header";
+import SearchBar from "./components/SearchBar";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <ListingContext>
           <MessageContext>
             <Header/>
+            <SearchBar></SearchBar>
             <Switch>
               <Route exact path="/" component={PrintMessages} />
               <Route exact path="/upload-listing" component={ListingUpload} />

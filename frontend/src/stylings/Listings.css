@@ -59,3 +59,14 @@ Label{
 #details-text{
   margin-left: 40px;
 }
+#search-bar-div{
+  display: flex;
+  justify-content: center;
+}
+
+#search-bar-form{
+  width: 70%;
+}
+#search-button{
+  height: 38px;
+}
