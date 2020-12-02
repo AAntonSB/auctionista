@@ -10,6 +10,7 @@ import ListingDetails from "./components/ListingDetails";
 import ListingThumbnail from "./components/ListingThumbnail";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
+import ListingList from "./components/ListingList";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Header/>
             <SearchBar/>
             <Switch>
+          <Route exact path="/" component={ListingList} />
               <Route exact path="/" component={PrintMessages} />
               <Route exact path="/upload-listing" component={ListingUpload} />
               <Route

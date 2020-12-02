@@ -1,7 +1,7 @@
 import React from "react"; 
 import { withRouter } from "react-router"
 import { FormGroup, Label, Col, Input, Button } from "reactstrap";
-import "../stylings/Listings.css";
+import "../css/Listings.css";
 
 const SearchBar = (props) => {
 
