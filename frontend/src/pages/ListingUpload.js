@@ -56,6 +56,13 @@ const ListingUpload = (props) => {
     method: "post",
     body: formData
   });
+
+      try {
+        data = await data.json();
+        props.history.push("/listing-details/" + data.id);
+      } catch {
+        console.log("Bad credentials");
+      }
   /*
   const uploadedImage = await data.json();
   if (uploadedImage) {
@@ -144,7 +151,7 @@ const ListingUpload = (props) => {
             />
           </FormGroup>
           <FormGroup>
-            <Label for="end-time-select">Choose end time</Label>
+            <Label for="end-time-select">Choose in how many days auction finishes </Label>
             <Input
             type="select"
               id="end-time-select"
