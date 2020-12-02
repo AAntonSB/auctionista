@@ -43,6 +43,7 @@
   float: left;
   padding: 0px 20px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .navigation .navlink:last-child {
