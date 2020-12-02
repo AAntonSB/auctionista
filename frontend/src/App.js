@@ -7,6 +7,8 @@ import ListingContext from "./contexts/ListingContextProvider";
 import PrintMessages from "./components/PrintMessages";
 import ListingUpload from "./pages/ListingUpload";
 import ListingDetails from "./components/ListingDetails";
+import ListingThumbnail from "./components/ListingThumbnail";
+import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import ListingList from "./components/ListingList";
 
@@ -16,12 +18,18 @@ function App() {
       <div className="App">
         <ListingContext>
           <MessageContext>
-            <SearchBar></SearchBar>
+            <Header/>
+            <SearchBar/>
             <Switch>
           <Route exact path="/" component={ListingList} />
               <Route exact path="/" component={PrintMessages} />
               <Route exact path="/upload-listing" component={ListingUpload} />
-              <Route exact path="/listing-details/:id" component={ListingDetails} />
+              <Route
+                exact
+                path="/listing-details/:id"
+                component={ListingDetails}
+              />
+              <Route exact path="/thumbnail" component={ListingThumbnail} />
             </Switch>
           </MessageContext>
         </ListingContext>
