@@ -36,7 +36,7 @@ const LoginModal = () => {
           </section>
 
           <section>
-            <label for="password" type="password">
+            <label for="password" className="block-label" type="password">
               Password
             </label>
             <div className="passwordBox">
