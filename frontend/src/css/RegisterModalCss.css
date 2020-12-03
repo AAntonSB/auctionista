@@ -1,4 +1,8 @@
-.screen{
+body {
+  padding-right: 0px !important;
+}
+
+.screen {
   display: absolute;
 }
 
