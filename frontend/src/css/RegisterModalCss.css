@@ -1,3 +1,7 @@
+.screen{
+  display: absolute;
+}
+
 .passwordBox {
   height: 21.25px;
 }
@@ -7,9 +11,10 @@
 }
 
 .ModalMoves {
-  position: absolute;
+  position: fixed;
   text-align: center;
-  top: 50%;
+  background-color: white;
+  top: 30%;
   left: 50%;
   width: 400px;
   margin: -100px 0 0 -200px;
@@ -19,13 +24,6 @@
 
 .login-modal {
   height: 385.69px;
-}
-
-.screen {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  height: 25vh;
 }
 
 section {
