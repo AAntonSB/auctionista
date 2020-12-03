@@ -47,7 +47,7 @@ const ListingThumbnail = (props) => {
           <strong>{props.listing.title}</strong>
         </p>
         <span className="myInline myAlignLeft" style={{ paddingRight: "10px" }}>
-          50 kr
+          {props.listing.startingBid} kr
         </span>
         <span className="myInline myAlignLeft">3 bud</span>
         <span className="myInline myAlignRight">{remainigTime()} </span>
