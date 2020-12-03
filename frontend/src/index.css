@@ -17,11 +17,6 @@ code {
 
 /* On mouse-over, add a deeper shadow */
 
-body {
-  background: #e2e1e0;
-  text-align: center;
-}
-
 .card {
   background: #fff;
   border-radius: 2px;
