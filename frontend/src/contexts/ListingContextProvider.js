@@ -16,7 +16,7 @@ const ListingContextProvider = (props) => {
   };
 
    const fetchAllListings = async () => {
-     let listings = await fetch("http://localhost:3000/rest/v1/listings");
+     let listings = await fetch("/rest/v1/listings");
      listings = await listings.json();
 
      console.log(listings);
@@ -29,7 +29,7 @@ const ListingContextProvider = (props) => {
 
    const fetchOneListing =  async (id) => {
 
-    let listing = await fetch("http://localhost:3000/rest/v1/listings/" + id);
+    let listing = await fetch("/rest/v1/listings/" + id);
     listing = await listing.json();
 
       console.log(listing)

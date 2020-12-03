@@ -14,7 +14,7 @@ const ListingDetails = (props) => {
 
    fetchData()
      if(listing.images){
-    setDisplayImage("http://localhost:4037/download/" + listing.images[0].filename)
+    setDisplayImage("/rest/v1/download/" + listing.images[0].filename)
   }
   },[]);
 
@@ -28,7 +28,7 @@ const ListingDetails = (props) => {
 useEffect(()=> {
   
   if(listing.images){
-    setDisplayImage("http://localhost:4037/download/" + listing.images[0].filename)
+    setDisplayImage("/rest/v1/download/" + listing.images[0].filename)
   }
 },[listing])
 
@@ -48,7 +48,6 @@ useEffect(()=> {
           </CardText>
         </CardBody>
       </Card>
-      <image src={"../logo.svg"}></image>
     </div>
   );
 };
