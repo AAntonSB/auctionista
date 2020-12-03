@@ -33,14 +33,19 @@ const ListingThumbnail = (props) => {
           src="https://img.tradera.net/images/865/381093865_97d590d0-90e0-4ef9-a7a7-40e245e07e9f.jpg"
           className="cardImage"
         ></img>
-        <p style={{ margin: "0px" }}>
-          <strong>{props.listing.title}</strong>
-        </p>
-        <span className="myInline myAlignLeft" style={{ paddingRight: "10px" }}>
-          50 kr
-        </span>
-        <span className="myInline myAlignLeft">3 bud</span>
-        <span className="myInline myAlignRight">{remainigTime()} </span>
+        <div id="left-aligned-text" style={{ marginLeft: "5px" }}>
+          <p style={{ margin: "0px", textAlign: "left" }}>
+            <strong>{props.listing.title}</strong>
+          </p>
+          <span
+            className="myInline myAlignLeft"
+            style={{ paddingRight: "10px" }}
+          >
+            50 kr
+          </span>
+          <span className="myInline myAlignLeft">3 bud</span>
+        </div>
+        <span className="myInline myAlignRight" style={{marginRight:"7px"}}>{remainigTime()} </span>
       </div>
     </>
   );
