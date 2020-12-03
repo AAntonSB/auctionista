@@ -3,7 +3,6 @@ import { withRouter } from "react-router";
 import { ListingContext } from "../contexts/ListingContextProvider";
 import ListingThumbnail from "./ListingThumbnail";
 
-
 const ListingList = (props) => {
   const listingContext = useContext(ListingContext);
   const [ListingList, setListingList] = useState([]);
@@ -14,15 +13,18 @@ const ListingList = (props) => {
 
   useEffect(() => {
     console.log(listingContext.listingList);
-  },[listingContext.listingList])
+  }, [listingContext.listingList]);
 
   return (
     <div>
       {listingContext.listingList.map((listing, i) => (
-        <ListingThumbnail key={String.valueOf(listing.id) + i} listing={listing} />
+        <ListingThumbnail
+          key={String.valueOf(listing.id) + i}
+          listing={(listing)}
+        />
       ))}
     </div>
   );
-}
+};
 
-export default withRouter(ListingList); 
+export default withRouter(ListingList);

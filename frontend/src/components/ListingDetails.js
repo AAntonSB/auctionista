@@ -1,46 +1,41 @@
 import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router";
 import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
-import {ListingContext} from "../contexts/ListingContextProvider";
-import "../css/Listings.css"
+import { ListingContext } from "../contexts/ListingContextProvider";
+import "../css/Listings.css";
 
 const ListingDetails = (props) => {
- const listingContext = useContext(ListingContext);
- const [listing, setListing] = useState([]);
- const [displayImage, setDisplayImage] = useState();
- const id = props.match.params.id;
+  const listingContext = useContext(ListingContext);
+  const [listing, setListing] = useState([]);
+  const [displayImage, setDisplayImage] = useState();
+  const id = props.match.params.id;
 
-  useEffect( () =>{
+  useEffect(() => {
+    fetchData();
+    if (listing.images) {
+      console.log(listing);
+      setDisplayImage(
+        "http://localhost:4037/download/" + listing.images[0].filename
+      );
+    }
+  }, []);
 
-   fetchData()
-     if(listing.images){
-    setDisplayImage("http://localhost:4037/download/" + listing.images[0].filename)
+  async function fetchData() {
+    setListing(await listingContext.fetchOneListing(id));
   }
-  },[]);
 
-     async function fetchData() {
-       setListing(
-         await listingContext
-           .fetchOneListing(id)
-       );
-     }
-
-useEffect(()=> {
-  
-  if(listing.images){
-    setDisplayImage("http://localhost:4037/download/" + listing.images[0].filename)
-  }
-},[listing])
+  useEffect(() => {
+    if (listing.images) {
+      setDisplayImage(
+        "http://localhost:4037/download/" + listing.images[0].filename
+      );
+    }
+  }, [listing]);
 
   return (
     <div className="listings-div">
       <Card id="listing-details">
-        <CardImg
-          top
-          width="100%"
-          src={displayImage}
-          alt="Card image cap"
-        />
+        <CardImg top width="100%" src={displayImage} alt="Card image cap" />
         <CardBody id="details-text">
           <CardTitle tag="h5">{listing.title}</CardTitle>
           <CardText>
