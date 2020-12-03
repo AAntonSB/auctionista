@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {} from "reactstrap";
+import { NavLink } from "reactstrap";
 import "../css/thumbnail.css";
 
 const ListingThumbnail = (props) => {
@@ -35,9 +35,15 @@ const ListingThumbnail = (props) => {
 
   return (
     <>
-      <div className="card card-1" style={{ padding: "2px" }}>
-        <img src={displayImage} className="cardImage"></img>
-        <p style={{ margin: "0px" }}>
+      <NavLink
+        href={"/listing-details/" + props.listing.id}
+        className="card card-1"
+        style={{ padding: "2px" }}
+      >
+        <div className="card-img">
+          <img src={displayImage} className="cardImage"></img>
+        </div>
+        <p style={{ margin: "0px" }} className="thumbnail-name">
           <strong>{props.listing.title}</strong>
         </p>
         <span className="myInline myAlignLeft" style={{ paddingRight: "10px" }}>
@@ -45,7 +51,7 @@ const ListingThumbnail = (props) => {
         </span>
         <span className="myInline myAlignLeft">3 bud</span>
         <span className="myInline myAlignRight">{remainigTime()} </span>
-      </div>
+      </NavLink>
     </>
   );
 };

@@ -43,7 +43,7 @@ const ListingDetails = (props) => {
           </CardText>
         </CardBody>
       </Card>
-      <image src={"../logo.svg"}></image>
+      <image src={"../logo.svg"}/>
     </div>
   );
 };
