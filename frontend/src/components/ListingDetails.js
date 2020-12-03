@@ -2,17 +2,20 @@ import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router";
 import { Card, CardBody, CardImg, CardText, CardTitle } from "reactstrap";
 import {ListingContext} from "../contexts/ListingContextProvider";
-import "../stylings/Listings.css"
+import "../css/Listings.css"
 
 const ListingDetails = (props) => {
  const listingContext = useContext(ListingContext);
  const [listing, setListing] = useState([]);
+ const [displayImage, setDisplayImage] = useState();
  const id = props.match.params.id;
 
   useEffect( () =>{
-   // console.log(listingContext.listingList.filter((l) => l.id === props.match.params.id));
-   // await listingContext.fetchOneListing();
+
    fetchData()
+     if(listing.images){
+    setDisplayImage("http://localhost:4037/download/" + listing.images[0].filename)
+  }
   },[]);
 
      async function fetchData() {
@@ -23,9 +26,11 @@ const ListingDetails = (props) => {
      }
 
 useEffect(()=> {
-  console.log(listing)
+  
+  if(listing.images){
+    setDisplayImage("http://localhost:4037/download/" + listing.images[0].filename)
+  }
 },[listing])
-
 
   return (
     <div className="listings-div">
@@ -33,7 +38,7 @@ useEffect(()=> {
         <CardImg
           top
           width="100%"
-          src={require("../logo.svg")}
+          src={displayImage}
           alt="Card image cap"
         />
         <CardBody id="details-text">
@@ -43,6 +48,7 @@ useEffect(()=> {
           </CardText>
         </CardBody>
       </Card>
+      <image src={"../logo.svg"}></image>
     </div>
   );
 };
