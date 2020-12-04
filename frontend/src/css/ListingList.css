@@ -1,0 +1,6 @@
+.my-grid-layout {
+  width: 80%;
+  display: grid;
+  grid-gap: .1rem 200px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
