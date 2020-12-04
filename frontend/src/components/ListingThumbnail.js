@@ -5,21 +5,24 @@ import "../css/thumbnail.css";
 const ListingThumbnail = (props) => {
   const [displayImage, setDisplayImage] = useState();
 
-  const remainigTime = () => {
-    let miliseconds = props.listing.endDate - new Date();
-    let seconds = miliseconds / 1000;
-    let minutes = seconds / 60;
-    let hours = minutes / 60;
-    let days = hours / 24;
+  function remainigTime() {
+    let distance = props.listing.endDate - new Date();
+    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    let hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
 
     let time = null;
     if (Math.trunc(days) >= 1) {
       time = Math.round(days) + " days left";
     } else if (Math.trunc(days) < 1) {
-      time = Math.round(hours) + " hours left";
+      time = hours + "h " + minutes + "m " + seconds + "s ";
     }
     return time;
-  };
+  }
 
   useEffect(() => {
     if (props.listing.images[0]) {

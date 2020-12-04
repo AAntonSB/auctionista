@@ -2,14 +2,12 @@
   box-sizing: border-box;
 }
  body{
-  /* background-color: #808F87; */
   overflow: scroll;
 } 
 .listings-div{
   display: flex;
   justify-content: center;
   height: 100vh; 
-  /* background-color: #808F87; */
 }
 #listing-upload{
   position:absolute;
@@ -62,11 +60,19 @@ Label{
 #search-bar-div{
   display: flex;
   justify-content: center;
+  margin-right: 0px;
+  width: 100%;
 }
 
 #search-bar-form{
+  margin-top: 20px;
   width: 70%;
+  justify-content:center;
 }
 #search-button{
   height: 38px;
+  border-radius: 20px;
+}
+#search-bar-input{
+  border-radius: 20px;
 }
