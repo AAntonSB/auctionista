@@ -22,7 +22,6 @@ function App() {
             <SearchBar/>
             <Switch>
           <Route exact path="/" component={ListingList} />
-              <Route exact path="/" component={PrintMessages} />
               <Route exact path="/upload-listing" component={ListingUpload} />
               <Route
                 exact
