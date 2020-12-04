@@ -3,6 +3,7 @@ import { withRouter } from "react-router";
 import { ListingContext } from "../contexts/ListingContextProvider";
 import ListingThumbnail from "./ListingThumbnail";
 import "../css/ListingList.css";
+import SearchBar from "./SearchBar";
 
 const ListingList = (props) => {
   const listingContext = useContext(ListingContext);
@@ -18,14 +19,17 @@ const ListingList = (props) => {
 
   return (
     <div>
-      {listingContext.listingList
-        .filter((listing) => listing.endDate > Date.now())
-        .map((listing, i) => (
-          <ListingThumbnail
-            key={String.valueOf(listing.id) + i}
-            listing={listing}
-          />
-        ))}
+      <SearchBar/>
+      <div className="my-grid-layout">
+        {listingContext.listingList
+          .filter((listing) => listing.endDate > Date.now())
+          .map((listing, i) => (
+            <ListingThumbnail
+              key={String.valueOf(listing.id) + i}
+              listing={listing}
+            />
+          ))}
+      </div>
     </div>
   );
 };

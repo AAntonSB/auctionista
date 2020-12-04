@@ -20,7 +20,6 @@ function App() {
         <ListingContext>
           <MessageContext>
             <Header/>
-            <SearchBar/>
             <Switch>
           <Route exact path="/" component={ListingList} />
               <Route exact path="/upload-listing" component={ListingUpload} />
