@@ -50,11 +50,12 @@ const ListingDetails = (props) => {
     ];
     let month = months[uni.getMonth()];
     let date = uni.getDate();
-    var hour = uni.getHours();
-    var min = uni.getMinutes();
+    let hour = uni.getHours();
+    let min = uni.getMinutes();
     return (
       <>
-        {date} {month} {hour.length < 2 ? hour : "0" + hour + ":" + min}
+        {date} {month}{" "}
+        {(hour.toString().length <= 2 ? "0" + hour :  hour) + ":" + min}
       </>
     );
   };
