@@ -12,7 +12,7 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById("root")
 );
-
+/*
 async function getListings() {
   let res = await fetch('/rest/v1/listings');
   res = await res.json();
@@ -20,7 +20,7 @@ async function getListings() {
 }
 
 getListings();
-
+*/
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

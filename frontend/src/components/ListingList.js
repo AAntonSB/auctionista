@@ -12,6 +12,22 @@ const ListingList = (props) => {
     await listingContext.fetchAllListings();
   }, []);
 
+  const fetchUser = async () => {
+    console.log("fetching user")
+  let res = await fetch('/rest/v1/user/auth/whoami')
+  try {
+    res = await res.json()
+    //setUser(res)
+    console.log(res);
+  } catch {
+    console.log('Not authenticated');
+  }
+}
+
+useEffect(() => {
+    fetchUser()
+}, [])
+
   useEffect(() => {
     console.log(listingContext.listingList);
   },[listingContext.listingList])

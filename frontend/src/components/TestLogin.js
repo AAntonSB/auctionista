@@ -1,65 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Modal } from "reactstrap";
+import React, { useState, useContext, useEffect } from "react";
+import { Button, FormGroup, Label, Input, Modal } from "reactstrap";
 import "../css/RegisterModalCss.css";
 
-const LoginModal = (props) => {
+const TestLogin = props => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  //const { fetchUser } = useContext(UserContext);
 
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('')
-
-  async function springLogin() {
-    const credentials =
-      "username=" +
-      encodeURIComponent(username) +
-      "&password=" +
-      encodeURIComponent(password);
-
-    console.log(credentials)
-    console.log("spring login")
-    console.log(username)
-    console.log(password)
-    console.log( "username=" +
-    encodeURIComponent(username) +
-    "&password=" +
-    encodeURIComponent(password))
-
-    let response = await fetch("/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: credentials
-    });
-
-    console.log(response)
-
-    if (response.url.includes("error")) {
-      console.log("Wrong username/password");
-    } else {
-      console.log("Successfully logged in");
-      fetchUser();
-      props.history.push("/");
-    }
-  }
-
-  const fetchUser = async () => {
-    console.log("fetching user")
-  let res = await fetch('/rest/v1/user/auth/whoami')
-  try {
-    res = await res.json()
-    //setUser(res)
-    console.log(res);
-  } catch {
-    console.log('Not authenticated');
-  }
-
-  }
-
-  useEffect(() => {
-    console.log("dude")
-    fetchUser();
-
-  }, [])
-
-  /*
   const fetchUser = async () => {
       console.log("fetching user")
     let res = await fetch('/rest/v1/user/auth/whoami')
@@ -70,26 +17,51 @@ const LoginModal = (props) => {
     } catch {
       console.log('Not authenticated');
     }
-
   }
 
   useEffect(() => {
       fetchUser()
   }, [])
-  */
 
-  
-  /* 
-                autoComplete="email"
-              autoFocus
-              required
-              id="email"
-              type="email"
-              name="email"
-  
-    
-  */
-  
+  async function springLogin() {
+    const credentials =
+      "username=" +
+      encodeURIComponent(username) +
+      "&password=" +
+      encodeURIComponent(password);
+
+      console.log(credentials)
+      console.log("spring login")
+      console.log(username)
+      console.log(password)
+      console.log( "username=" +
+      encodeURIComponent(username) +
+      "&password=" +
+      encodeURIComponent(password))
+
+    let response = await fetch("/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: credentials
+    });
+
+    if (response.url.includes("error")) {
+      console.log("Wrong username/password");
+    } else {
+      console.log("Successfully logged in");
+      fetchUser();
+      props.history.push("/");
+    }
+  }
+
+  const pStyle = {
+    textAlign: "center",
+    marginTop: "15px",
+    fontWeight: "bold",
+    cursor: 'pointer',
+    userSelect: 'none'
+  };
+
   return (
     <div className="screen">
       <Modal isOpen={true} className="ModalMoves login-modal" autoFocus={false}>
@@ -132,4 +104,4 @@ const LoginModal = (props) => {
   );
 };
 
-export default LoginModal;
+export default TestLogin;

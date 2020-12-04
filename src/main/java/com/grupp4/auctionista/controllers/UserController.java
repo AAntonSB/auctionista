@@ -36,6 +36,11 @@ public class UserController {
         return ResponseEntity.ok(userService.findAll());
     }
 
+    @GetMapping("/auth/whoami")
+    public User whoami(){
+        return userService.findCurrentUser();
+    }
+
     @Operation(summary = "Finds user by id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "User found",
@@ -60,6 +65,12 @@ public class UserController {
     @PostMapping
     public ResponseEntity<User> registerUser(@RequestBody User user){
         return ResponseEntity.ok(userService.saveUser(user));
+    }
+
+    @PostMapping("/adduser")
+    public User addUser(@RequestBody User user){
+            return userService.registerUser(user);
+
     }
 
     @Operation(summary = "Updates an existing user")
