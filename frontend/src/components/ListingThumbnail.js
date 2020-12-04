@@ -3,10 +3,6 @@ import {} from "reactstrap";
 import "../css/thumbnail.css";
 
 const ListingThumbnail = (props) => {
-   
-  useEffect(()=>{
-    console.log((Math.round((props.listing.endDate - new Date())/ (24*60*60*1000))));
-  },[]);
 
   const remainigTime = () =>{
     let miliseconds = props.listing.endDate - new Date();

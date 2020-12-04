@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { withRouter } from "react-router";
 import { ListingContext } from "../contexts/ListingContextProvider";
 import ListingThumbnail from "./ListingThumbnail";
@@ -6,15 +6,15 @@ import ListingThumbnail from "./ListingThumbnail";
 
 const ListingList = (props) => {
   const listingContext = useContext(ListingContext);
-  const [ListingList, setListingList] = useState([]);
+  //const [ListingList, setListingList] = useState([]);
 
   useEffect(async () => {
     await listingContext.fetchAllListings();
   }, []);
 
-  useEffect(() => {
-    console.log(listingContext.listingList);
-  },[listingContext.listingList])
+  // useEffect(() => {
+  //   console.log(listingContext.listingList);
+  // },[listingContext.listingList])
 
   return (
     <div>
