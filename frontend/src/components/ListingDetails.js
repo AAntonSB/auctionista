@@ -55,7 +55,7 @@ const ListingDetails = (props) => {
     return (
       <>
         {date} {month}{" "}
-        {(hour.toString().length <= 2 ? "0" + hour :  hour) + ":" + min}
+        {(hour.toString().length < 2 ? "0" + hour : hour) + ":" + min}
       </>
     );
   };
