@@ -18,9 +18,14 @@ const ListingList = (props) => {
 
   return (
     <div>
-      {listingContext.listingList.map((listing, i) => (
-        <ListingThumbnail key={String.valueOf(listing.id) + i} listing={listing} />
-      ))}
+      {listingContext.listingList
+        .filter((listing) => listing.endDate > Date.now())
+        .map((listing, i) => (
+          <ListingThumbnail
+            key={String.valueOf(listing.id) + i}
+            listing={listing}
+          />
+        ))}
     </div>
   );
 }
