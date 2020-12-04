@@ -2,7 +2,7 @@ import React, { useEffect, useContext } from "react";
 import { withRouter } from "react-router";
 import { ListingContext } from "../contexts/ListingContextProvider";
 import ListingThumbnail from "./ListingThumbnail";
-
+import "../css/ListingList.css";
 
 const ListingList = (props) => {
   const listingContext = useContext(ListingContext);
@@ -28,6 +28,6 @@ const ListingList = (props) => {
         ))}
     </div>
   );
-}
+};
 
-export default withRouter(ListingList); 
+export default withRouter(ListingList);

@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
-import {} from "reactstrap";
+import React, { useEffect, useState } from "react";
+import { NavLink } from "reactstrap";
 import "../css/thumbnail.css";
 
 const ListingThumbnail = (props) => {
+  const [displayImage, setDisplayImage] = useState();
 
   const remainigTime = () =>{
     let distance = props.listing.endDate - new Date();
@@ -20,32 +21,40 @@ const ListingThumbnail = (props) => {
     }else if (Math.trunc(days) < 1) {
       time = hours + "h " + minutes + "m " + seconds + "s ";
     }
-    return time; 
-  }
+    return time;
+  };
 
-
+  useEffect(() => {
+    if (props.listing.images[0]) {
+      console.log(props.listing.images[0].filename);
+      setDisplayImage(
+        "http://localhost:4037/download/" + props.listing.images[0].filename
+      );
+    } else {
+      let x = Math.random(1, 100);
+      setDisplayImage("https://picsum.photos/300/200?random=" + x);
+    }
+  }, [props.listing]);
 
   return (
     <>
-      <div className="card card-1" style={{ padding: "2px" }}>
-        <img
-          src="https://img.tradera.net/images/865/381093865_97d590d0-90e0-4ef9-a7a7-40e245e07e9f.jpg"
-          className="cardImage"
-        ></img>
-        <div id="left-aligned-text" style={{ marginLeft: "5px" }}>
-          <p style={{ margin: "0px", textAlign: "left" }}>
-            <strong>{props.listing.title}</strong>
-          </p>
-          <span
-            className="myInline myAlignLeft"
-            style={{ paddingRight: "10px" }}
-          >
-            50 kr
-          </span>
-          <span className="myInline myAlignLeft">3 bud</span>
+      <NavLink
+        href={"/listing-details/" + props.listing.id}
+        className="card card-1"
+        style={{ padding: "2px" }}
+      >
+        <div className="card-img">
+          <img src={displayImage} className="cardImage"></img>
         </div>
-        <span className="myInline myAlignRight" style={{marginRight:"7px"}}>{remainigTime()} </span>
-      </div>
+        <p style={{ margin: "0px" }} className="thumbnail-name">
+          <strong>{props.listing.title}</strong>
+        </p>
+        <span className="myInline myAlignLeft" style={{ paddingRight: "10px" }}>
+          {props.listing.startingBid} kr
+        </span>
+        <span className="myInline myAlignLeft">3 bud</span>
+        <span className="myInline myAlignRight">{remainigTime()} </span>
+      </NavLink>
     </>
   );
 };
