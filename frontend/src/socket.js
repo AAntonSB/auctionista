@@ -33,8 +33,20 @@ function connect() {
 
   ws.onopen = (e) => {
     send({
-      action: 'connection',
-      payload: 'user connected'
+      action: "connection",
+      payload: "user connected",
+    });
+    send({
+      action: "listen-to",
+      payload: "dude",
+    });
+    send({
+      action: "listen-to",
+      payload: "dude",
+    });
+    send({
+      action: "listen-to",
+      payload: "dude",
     });
     isConnected = true;
   };
@@ -59,9 +71,9 @@ function send(data) {
 }
 
 function sendMessage(message) {
-  console.log("i was her")
+  console.log("i was her");
   send({
-    action: "message",
+    action: "listen-to",
     payload: message,
   });
 }

@@ -29,7 +29,6 @@ public class SocketController extends TextWebSocketHandler {
 
         var socketDTO = objectMapper.readValue(message.getPayload(), SocketDTO.class);
 
-
         switch(socketDTO.action){
             case "message":
                 socketService.saveNewMessage(
@@ -42,6 +41,10 @@ public class SocketController extends TextWebSocketHandler {
                 System.out.println("User connected");
                 break;
             case "user-status":
+                break;
+            case "listen-to":
+                socketService.addSpectator(session, "senap");
+                // Payload: UUID listing-id,
                 break;
             default:
                 System.out.println("Could not read action: " + socketDTO.action);
@@ -58,6 +61,7 @@ public class SocketController extends TextWebSocketHandler {
 
     @Override
     public void afterConnectionEstablished(WebSocketSession session) {
+        System.out.println("session: " + session.getId());
         socketService.addSession(session);
     }
 

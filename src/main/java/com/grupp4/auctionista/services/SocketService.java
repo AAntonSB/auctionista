@@ -3,13 +3,16 @@ package com.grupp4.auctionista.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupp4.auctionista.entities.Message;
+import org.apache.kafka.common.utils.CopyOnWriteMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
@@ -23,7 +26,7 @@ public class SocketService {
     ObjectMapper objectMapper = new ObjectMapper();
 
     private List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
-    //Map<channelID, List<WebSocketSessions>>
+    private Map<String, List<WebSocketSession>> spectators = new CopyOnWriteMap<>();
 
     public void sendToOne(WebSocketSession webSocketSession, String message) throws IOException {
         webSocketSession.sendMessage(new TextMessage(message));
@@ -56,6 +59,20 @@ public class SocketService {
 
     public void addSession(WebSocketSession session) {
         sessions.add(session);
+    }
+
+    public void addSpectator(WebSocketSession session, String id){
+        if(!spectators.containsKey(id)){
+            var list = new ArrayList<WebSocketSession>();
+            list.add(session);
+            spectators.put(id, list);
+        }else{
+            System.out.println(session.getId());
+            if(spectators.get(id).stream().noneMatch(o -> o.getId().equals(session.getId()))) {
+                spectators.get(id).add(session);
+            }
+        }
+        System.out.println("Spectators in session: "+ spectators.get(id));
     }
 
     public void removeSession(WebSocketSession session) {

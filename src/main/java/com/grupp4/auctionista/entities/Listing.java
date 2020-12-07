@@ -21,8 +21,8 @@ public class Listing {
     @GeneratedValue
 
     private UUID id ;
-    //private UUID sellerId;
-    //private UUID purchaserId;
+    private UUID sellerId;
+    private UUID purchaserId;
     private String title;
     private String description;
     private int reservedPrice;

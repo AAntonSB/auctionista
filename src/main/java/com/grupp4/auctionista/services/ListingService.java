@@ -1,22 +1,18 @@
 package com.grupp4.auctionista.services;
 
-import com.grupp4.auctionista.entities.Bid;
 import com.grupp4.auctionista.entities.ActiveListing;
 import com.grupp4.auctionista.entities.ActiveListings;
+import com.grupp4.auctionista.entities.Bid;
 import com.grupp4.auctionista.entities.Listing;
 import com.grupp4.auctionista.repositories.BidRepo;
 import com.grupp4.auctionista.repositories.ListingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.annotation.PostConstruct;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -82,22 +78,24 @@ public class ListingService {
         var listings = getAllListings();
         var activeListings = ActiveListings.getInstance();
         System.out.println("hej nu startar vi");
+        // Mappar om listings till activeListing
         activeListings.setActiveListings(listings.stream()
                 .map((listing) -> new ActiveListing(listing.getId(), listing.getEndDate()))
                 .sorted(Comparator.comparingLong(ActiveListing::getTimestamp)).toArray(ActiveListing[]::new));
     }
 
-    @Scheduled(fixedRate = 1000)
-    public void checkActiveAuctions() {
-        var activeListings = ActiveListings.getInstance();
-
-        long now = TimeStampService.getTimestamp();
-        System.out.println("hej nu kör vi");
-
-        var expiredListings = activeListings.expireListingsFrom(now);
-        for (UUID expiredListingId : expiredListings) {
-            var listing = getListingById(expiredListingId);
-            // make the listings highest bidder the winner
-        }
-    }
+//    @PostConstruct
+//    public void checkActiveAuctions() throws InterruptedException {
+//        while(true) {
+//            var activeListings = ActiveListings.getInstance();
+//            long now = TimeStampService.getTimestamp();
+//            System.out.println("hej nu kör vi");
+//
+//            var expiredListings = activeListings.expireListingsFrom(now);
+//            for (UUID expiredListingId : expiredListings) {
+//                var listing = getListingById(expiredListingId);
+//                // make the listings highest bidder the winner
+//            }
+//        }
+//    }
 }
