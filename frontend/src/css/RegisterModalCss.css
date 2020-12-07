@@ -1,0 +1,68 @@
+body {
+  padding-right: 0px !important;
+}
+
+.screen {
+  display: absolute;
+}
+
+.passwordBox {
+  height: 21.25px;
+}
+
+.inputFit {
+  height: auto;
+}
+
+.ModalMoves {
+  position: fixed;
+  text-align: center;
+  background-color: white;
+  top: 30%;
+  left: 50%;
+  width: 400px;
+  margin: -100px 0 0 -200px;
+  padding: 25px;
+  box-shadow: 0 50px 100px rgba(50, 50, 93, .1), 0 15px 35px rgba(50, 50, 93, .15), 0 5px 15px rgba(0, 0, 0, .1);
+}
+
+.login-modal {
+  height: 385.69px;
+}
+
+section {
+  padding: 10px;
+}
+
+.password-constraints-font {
+  margin-top: 6px;
+  font-size: 12px;
+}
+
+.login-route {
+  font-size: 12px;
+}
+
+.block-label {
+  display: block;
+}
+
+.close-button {
+  border: none;
+  display: inline-block;
+  padding: 8px 16px;
+  vertical-align: middle;
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  background-color: inherit;
+  text-align: center;
+  cursor: pointer;
+  white-space: nowrap
+}
+
+.topright {
+  position: absolute;
+  right: 0;
+  top: 0
+}
