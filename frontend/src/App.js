@@ -11,8 +11,6 @@ import ListingThumbnail from "./components/ListingThumbnail";
 import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import ListingList from "./components/ListingList";
-import LoginModal from "./components/LoginModal";
-import TestLogin from "./components/TestLogin"
 
 function App() {
   return (
@@ -31,8 +29,6 @@ function App() {
                 component={ListingDetails}
               />
               <Route exact path="/thumbnail" component={ListingThumbnail} />
-              <Route exact path="/perform-login" component={LoginModal} />
-              <Route exact path="/test-login" component={TestLogin} />
             </Switch>
           </MessageContext>
         </ListingContext>

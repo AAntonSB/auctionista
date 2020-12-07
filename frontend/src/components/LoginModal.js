@@ -7,21 +7,13 @@ const LoginModal = (props) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('')
 
-  async function springLogin() {
+  async function springLogin(e) {
+    e.preventDefault()
     const credentials =
       "username=" +
       encodeURIComponent(username) +
       "&password=" +
       encodeURIComponent(password);
-
-    console.log(credentials)
-    console.log("spring login")
-    console.log(username)
-    console.log(password)
-    console.log( "username=" +
-    encodeURIComponent(username) +
-    "&password=" +
-    encodeURIComponent(password))
 
     let response = await fetch("/login", {
       method: "POST",
@@ -54,29 +46,9 @@ const LoginModal = (props) => {
   }
 
   useEffect(() => {
-    console.log("dude")
     fetchUser();
 
   }, [])
-
-  /*
-  const fetchUser = async () => {
-      console.log("fetching user")
-    let res = await fetch('/rest/v1/user/auth/whoami')
-    try {
-      res = await res.json()
-      //setUser(res)
-      console.log(res);
-    } catch {
-      console.log('Not authenticated');
-    }
-
-  }
-
-  useEffect(() => {
-      fetchUser()
-  }, [])
-  */
 
   
   /* 

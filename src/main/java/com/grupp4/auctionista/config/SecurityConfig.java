@@ -23,7 +23,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/").authenticated()
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers(HttpMethod.GET,"/rest/v1/listings/**").permitAll()
-                .antMatchers(HttpMethod.GET,"/rest/v1/user/**").permitAll()
+                //.antMatchers(HttpMethod.GET,"/rest/v1/user/**").permitAll()
                 .and()
                 .formLogin()
                 .loginPage("/login")
