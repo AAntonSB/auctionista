@@ -1,7 +1,7 @@
 package com.grupp4.auctionista.controllers;
 
+import com.grupp4.auctionista.entities.Bid;
 import com.grupp4.auctionista.entities.Listing;
-
 import com.grupp4.auctionista.services.ImageUploadService;
 import com.grupp4.auctionista.services.ListingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -78,10 +77,14 @@ public class ListingController {
     }
      */
 
-
     @DeleteMapping("/{id}")
     public void deleteListing(@PathVariable UUID id){
         listingService.deleteListing(id);
+    }
+
+    @PostMapping("/{id}/bid")
+    public void createBid(@PathVariable UUID id, @RequestBody Bid bid){
+        listingService.createBid(id, bid);
     }
 
 }
