@@ -4,7 +4,8 @@ import "../css/RegisterModalCss.css";
 
 const LoginModal = () => {
   return (
-      <Modal isOpen={true} className="ModalMoves login-modal" autoFocus={false}>
+    <Modal isOpen={true} className="ModalMoves login-modal" autoFocus={false}>
+      <button className="close-button topright">x</button>
         <form>
           <h1>Login</h1>
           <section>
