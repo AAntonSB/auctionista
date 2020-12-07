@@ -4,25 +4,58 @@ import "../css/thumbnail.css";
 
 const ListingThumbnail = (props) => {
   const [displayImage, setDisplayImage] = useState();
+  const [isActive, setIsActive] = useState(true);
+  const [timeLeft, setTimeLeft] = useState();
+  let interval = null;
+  // const [seconds, setSeconds] = useState();
+    // function remainigTime() {
+  //   let distance = props.listing.endDate - new Date();
+  //   let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  //   let hours = Math.floor(
+  //     (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  //   );
+  //   let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  //   let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-  function remainigTime() {
-    let distance = props.listing.endDate - new Date();
-    let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    let hours = Math.floor(
-      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
+  //   let time = null;
+  //   if (Math.trunc(days) >= 1) {
+  //     time = Math.round(days) + " days left";
+  //   } else if (Math.trunc(days) < 1) {
+  //     time = hours + "h " + minutes + "m " + seconds + "s ";
+  //   }
+  //   return time;
+  // }
 
-    let time = null;
-    if (Math.trunc(days) >= 1) {
-      time = Math.round(days) + " days left";
-    } else if (Math.trunc(days) < 1) {
-      time = hours + "h " + minutes + "m " + seconds + "s ";
+  useEffect(() => {
+    
+    
+    if (isActive) {
+      interval = setInterval(() => {
+        let distance = props.listing.endDate - new Date();
+          let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+          let hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+          );
+          let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+          let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+          let time = null;
+          if (days > 0) {
+            time = days + " days left";
+          } else if (hours > 0) {
+            time = hours + "h " + minutes + "m " + seconds + "s";
+          }else if(minutes>0){
+            time = minutes + "m " + seconds + "s";
+          }else if(seconds>0){
+            time = seconds + "s";
+          }else{
+            setIsActive(false);
+          }
+          setTimeLeft(time);
+      }, 500);
     }
-    return time;
-  }
+  }, [isActive, timeLeft]);
 
   useEffect(() => {
     if (props.listing.images[0]) {
@@ -53,7 +86,7 @@ const ListingThumbnail = (props) => {
           {props.listing.startingBid} kr
         </span>
         <span className="myInline myAlignLeft">3 bud</span>
-        <span className="myInline myAlignRight">{remainigTime()} </span>
+        <span className="myInline myAlignRight">{timeLeft} </span>
       </NavLink>
     </>
   );

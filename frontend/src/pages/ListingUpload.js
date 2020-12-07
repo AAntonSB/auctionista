@@ -29,8 +29,6 @@ const ListingUpload = (props) => {
     });
   };
 
- // const {appendListing} = useContext(ListingContextProvider);
-
  const submitListing = async event => {
    event.preventDefault();
    let endDate = Date.now() + numberOfDays * 24 * 60 * 60 * 1000;
