@@ -4,8 +4,6 @@ import "../css/RegisterModalCss.css";
 
 const LoginModal = () => {
   return (
-    <div className="screen">
-      <button className="close-button topright">x</button>
       <Modal isOpen={true} className="ModalMoves login-modal" autoFocus={false}>
         <form>
           <h1>Login</h1>
@@ -43,7 +41,6 @@ const LoginModal = () => {
           </p>
         </form>
       </Modal>
-    </div>
   );
 };
 

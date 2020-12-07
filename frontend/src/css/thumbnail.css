@@ -6,3 +6,59 @@
 .ex6 .span-1 {
   grid-column: 1 / 5;
 }
+
+.card {
+  background: #fff;
+  border-radius: 2px;
+  display: inline-block;
+  height: 260px;
+  margin: 1rem;
+  position: relative;
+  width: 300px;
+  cursor: pointer;
+  text-decoration: none;
+  color: black;
+}
+
+.card-img {
+  display: grid;
+  place-items: center;
+}
+
+.thumbnail-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 300px;
+}
+
+.myInline {
+  display: inline;
+}
+
+.myAlignRight {
+  float: right;
+}
+
+.myAlignLeft {
+  float: left;
+}
+
+.cardImage {
+  max-width: 300px;
+  max-height: 210px;
+}
+
+.card-1 {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+}
+
+.card-1:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.container {
+  background-color: wheat;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}

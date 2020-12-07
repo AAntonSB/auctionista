@@ -4,7 +4,6 @@ import { Modal } from "reactstrap";
 
 const LoginModal = () => {
   return (
-    <div className="screen">
       <Modal isOpen={true} className="ModalMoves" autoFocus={false}>
         <form>
           <h1>Register</h1>
@@ -75,7 +74,6 @@ const LoginModal = () => {
           <p className="login-route">Already have an account? click me! </p>
         </form>
       </Modal>
-    </div>
   );
 };
 
