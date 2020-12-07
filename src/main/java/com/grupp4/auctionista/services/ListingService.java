@@ -56,10 +56,29 @@ public class ListingService {
         System.out.println(listings);
         return listings;
     }
-}
+
+    private Object getLock(UUID id) {
+        locks.putIfAbsent(id, new Object());
+        return locks.get(id);
+    }
+
+    public void createBid(UUID id, Bid bid) {
+        synchronized (getLock(id)) {
+            var listing = getListingById(id);
+            var now = TimeStampService.getTimestamp();
+            if (now >= listing.getEndDate())
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The auction is over");
+//            if (bid.getAmount() <= listing.getHighestBid().getAmount())
+//                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The bid is lower then the current highest bid");
+
+            bid.setTimestamp(now);
+            bidRepo.save(bid);
+//            listing.setHighestBid(bid);
+        }
+    }
 
     @PostConstruct
-    public void initFlups() {
+    public void initActiveListings() {
         var listings = getAllListings();
         var activeListings = ActiveListings.getInstance();
         System.out.println("hej nu startar vi");
