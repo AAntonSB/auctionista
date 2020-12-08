@@ -40,15 +40,15 @@ public class ListingController {
         return ResponseEntity.ok(listingService.getListingById(id));
     }
 
-    @GetMapping("search/{searchString}")
+    @GetMapping("/search/{searchString}")
     public ResponseEntity<List<Listing>> findListingsBySearchString(@PathVariable String searchString) {
         System.out.println("Listing Controller ");
         return ResponseEntity.ok(listingService.getListingsBySearchString(searchString));
     }
 
-    @GetMapping("/bids")
-    public List<Bid> getAllBids(){
-        return bidService.getAllBids();
+    @GetMapping("/bids/{listingId}")
+    public ResponseEntity<List<Bid>> findBidsWithListingId(@PathVariable UUID listingId){
+        return ResponseEntity.ok(bidService.getBidsByListingId(listingId));
     }
 
     @PostMapping("/bids")

@@ -1,10 +1,26 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Row, Col, Card, CardText } from "reactstrap";
 import "../css/ListingDetails.css";
 import TimeLeft from "./TimeLeft";
+import { ListingContext } from "../contexts/ListingContextProvider";
+import { SignalCellularNull } from "@material-ui/icons";
 
 const Bidding = (props) => {
+  const listingContext = useContext(ListingContext);
   const [amount, setAmount] = useState("");
+  const [listingBids, setListingBids] = useState([]);
+  const [highestBid, setHighestBid] = useState(SignalCellularNull);
+  
+  useEffect(()=>{
+    console.log(props)
+    fetchData();
+  },[]);
+
+    async function fetchData() {
+      setListingBids(await listingContext.getBidsFromListing(props.id));
+      setHighestBid(listingBids[0].amount);
+    }
+
 
   const createBid = async event => {
 
@@ -40,7 +56,7 @@ const Bidding = (props) => {
     <div className="payment-block">
       <div className="starting-price">
         <p className="payment-cursive-text">Highest bid</p>
-        <p className="payment-regular-text">{props.startingBid} kr</p>
+        <p className="payment-regular-text">{highestBid} kr</p>
       </div>
       <div className="end-time">
         <p className="payment-cursive-text"> Ends</p>
