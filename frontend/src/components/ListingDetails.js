@@ -15,7 +15,7 @@ const ListingDetails = (props) => {
     if (listing.images) {
       console.log(listing);
       setDisplayImage(
-        "http://localhost:4037/download/" + listing.images[0].filename
+        "/rest/v1/download/" + listing.images[0].filename
       );
     }
   }, []);
@@ -27,7 +27,7 @@ const ListingDetails = (props) => {
   useEffect(() => {
     if (listing.images) {
       setDisplayImage(
-        "http://localhost:4037/download/" + listing.images[0].filename
+        "/rest/v1/download/" + listing.images[0].filename
       );
     }
   }, [listing]);

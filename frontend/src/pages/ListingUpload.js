@@ -52,7 +52,7 @@ const ListingUpload = (props) => {
    formData.append('listing', blob);
    formData.append("images", picture.pictureAsFile);
 
-   const data = await fetch("http://localhost:4037/rest/v1/listings/tripple", {
+   const data = await fetch("/rest/v1/listings/tripple", {
     method: "post",
     body: formData
   });
