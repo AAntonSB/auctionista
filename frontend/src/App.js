@@ -11,9 +11,9 @@ import Header from "./components/Header";
 import ListingList from "./components/ListingList";
 import About from "./components/About";
 import { useNotification } from "./providers/NotificationProvider";
+import UserContext from "./contexts/UserContexts";
 
 function App() {
-
   const dispatch = useNotification();
 
   const handleNewNotification = () => {
@@ -28,21 +28,23 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <ListingContext>
-          <MessageContext>
-            <Header />
-            <button onClick={handleNewNotification}>test</button>
-            <Switch>
-              <Route exact path="/" component={ListingList} />
-              <Route exact path="/upload-listing" component={ListingUpload} />
-              <Route
-                exact
-                path="/listing-details/:id"
-                component={ListingDetails}
-              />
-              <Route exact path="/thumbnail" component={ListingThumbnail} />
-              <Route exact path="/about" component={About} />
-            </Switch>
-          </MessageContext>
+          <UserContext>
+            <MessageContext>
+              <Header />
+              {/* <button onClick={handleNewNotification}>test</button> */}
+              <Switch>
+                <Route exact path="/" component={ListingList} />
+                <Route exact path="/upload-listing" component={ListingUpload} />
+                <Route
+                  exact
+                  path="/listing-details/:id"
+                  component={ListingDetails}
+                />
+                <Route exact path="/thumbnail" component={ListingThumbnail} />
+                <Route exact path="/about" component={About} />
+              </Switch>
+            </MessageContext>
+          </UserContext>
         </ListingContext>
       </div>
     </BrowserRouter>
