@@ -6,8 +6,10 @@ let data;
 connect();
 
 function connect() {
-  // change PORT to your backends PORT
-  ws = new WebSocket("ws://localhost:4037/your-socket-route");
+  // change PORT to your backends PORT\
+  ///your-socket-route
+  //ws = new WebSocket("ws://localhost:4037/your-socket-route");
+  ws = new WebSocket("ws:/your-socket-route");
 
   ws.onmessage = (e) => {
     //fires when a message is recieved
@@ -77,16 +79,20 @@ function send(data) {
   ws.send(JSON.stringify(data));
 }
 
-function sendMessage(message) {
+async function sendMessage(message) {
   console.log("i was her");
-  send({
+  ws.send(JSON.stringify({
     action: "listen-to",
     payload: message,
-  });
+  }));
 }
 
 function showSomething(message) {
   console.log(message);
 }
 
-export { send, sendMessage, connect, data };
+const test = () => {
+  console.log("testing")
+}
+
+export { send, sendMessage, connect, test, data };

@@ -12,6 +12,7 @@ import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import ListingList from "./components/ListingList";
 import About from "./components/About";
+import NewMessage from "./components/NewMessage";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               />
               <Route exact path="/thumbnail" component={ListingThumbnail} />
               <Route exact path="/about" component={About}/>
+              <Route exact path="/message" component={NewMessage} />
             </Switch>
           </MessageContext>
         </ListingContext>
