@@ -15,7 +15,7 @@ const ListingList = (props) => {
 
   const fetchUser = async () => {
     console.log("fetching user")
-  let res = await fetch('/rest/v1/user/auth/whoami')
+  let res = await fetch('/auth/whoami')
   try {
     res = await res.json()
     //setUser(res)
