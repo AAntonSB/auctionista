@@ -10,6 +10,8 @@ function connect() {
   ws = new WebSocket("ws://localhost:4037/your-socket-route");
 
   ws.onmessage = (e) => {
+    //fires when a message is recieved
+    console.log("this message should show when a message is recieved")
     let dataWrapper;
     try {
       dataWrapper = JSON.parse(e.data);
@@ -47,6 +49,11 @@ function connect() {
     send({
       action: "listen-to",
       payload: "dude",
+    });
+    send({
+      action: "new-bid",
+      payload: {"listing": "senap",
+                "amount": 100},
     });
     isConnected = true;
   };

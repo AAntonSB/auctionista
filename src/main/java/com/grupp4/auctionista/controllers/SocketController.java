@@ -2,6 +2,7 @@ package com.grupp4.auctionista.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.grupp4.auctionista.dtos.SocketDTO;
+import com.grupp4.auctionista.entities.Bid;
 import com.grupp4.auctionista.entities.Message;
 import com.grupp4.auctionista.services.SocketService;
 import org.springframework.stereotype.Controller;
@@ -25,12 +26,21 @@ public class SocketController extends TextWebSocketHandler {
 
     @Override
     public void handleTextMessage(WebSocketSession session, TextMessage message) throws IOException {
+        //this function handles all incoming socket messages
         System.out.println("Received msg: " + message.getPayload());
 
         var socketDTO = objectMapper.readValue(message.getPayload(), SocketDTO.class);
 
+        System.out.println("what does the object mapper get?");
+        System.out.println(objectMapper.writeValueAsString(socketDTO.payload));
+        System.out.println("this");
+
+
         switch(socketDTO.action){
             case "message":
+                //System.out.println("what does the object mapper get?");
+                //System.out.println(objectMapper.writeValueAsString(socketDTO.payload));
+                //System.out.println("this");
                 socketService.saveNewMessage(
                         objectMapper.readValue(
                         objectMapper.writeValueAsString(socketDTO.payload)
@@ -41,6 +51,14 @@ public class SocketController extends TextWebSocketHandler {
                 System.out.println("User connected");
                 break;
             case "user-status":
+                break;
+            case "new-bid":
+                System.out.println("incoming new bid");
+                System.out.println(socketDTO.payload);
+                System.out.println(objectMapper.readValue(objectMapper.writeValueAsString(socketDTO.payload), Bid.class));
+                System.out.println("junky conversion");
+                //System.out.println(socketDTO.payload);
+                //do stuff
                 break;
             case "listen-to":
                 socketService.addSpectator(session, "senap");

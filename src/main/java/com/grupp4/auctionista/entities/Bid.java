@@ -21,4 +21,6 @@ public class Bid {
     private UUID id;
     private long amount;
     private long timestamp;
+    private UUID bidder;
+    private String listing;
 }

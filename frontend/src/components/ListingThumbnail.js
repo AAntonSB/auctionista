@@ -26,7 +26,7 @@ const ListingThumbnail = (props) => {
 
   useEffect(() => {
     if (props.listing.images[0]) {
-      console.log(props.listing.images[0].filename);
+      //console.log(props.listing.images[0].filename);
       setDisplayImage(
         "http://localhost:4037/download/" + props.listing.images[0].filename
       );
