@@ -2,9 +2,6 @@ body {
   padding-right: 0px !important;
 }
 
-.screen {
-  display: absolute;
-}
 
 .passwordBox {
   height: 21.25px;
@@ -47,6 +44,13 @@ section {
   display: block;
 }
 
+.loginpage-center {
+  display:grid;
+  place-items: center;
+
+
+}
+
 .close-button {
   border: none;
   display: inline-block;
@@ -65,4 +69,9 @@ section {
   position: absolute;
   right: 0;
   top: 0
+}
+
+.screen {
+  width: 100vw;
+  height: 100vh;
 }

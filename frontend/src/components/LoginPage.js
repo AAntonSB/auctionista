@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { Modal } from "reactstrap";
 import "../css/RegisterModalCss.css";
 
 const LoginModal = () => {
@@ -8,9 +7,9 @@ const LoginModal = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
-  async function springLogin(e) {
+  async function springLogin() {
     console.log("Spring login")
-    e.preventDefault()
+    //e.preventDefault()
     const credentials =
       "username=" +
       encodeURIComponent(username) +
@@ -70,9 +69,8 @@ const LoginModal = () => {
   */
 
   return (
-    <Modal isOpen={true} className="ModalMoves login-modal" autoFocus={false}>
-      <button className="close-button topright">x</button>
-        <form>
+      <div className="screen">
+        <form className="loginpage-center">
           <h1>Login</h1>
           <section>
             <label for="email" className="block-label">
@@ -101,12 +99,13 @@ const LoginModal = () => {
             />
           </section>
 
-          <button onClick={fetchUser}>Login</button>
+
+        </form>
+        <button onClick={springLogin}>Login</button>
           <p className="login-route">
             Don't have an account? no problemos, click me!
           </p>
-        </form>
-      </Modal>
+      </div>
   );
 };
 
