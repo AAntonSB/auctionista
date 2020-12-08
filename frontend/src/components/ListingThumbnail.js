@@ -44,7 +44,7 @@ const ListingThumbnail = (props) => {
     if (props.listing.images[0]) {
       console.log(props.listing.images[0].filename);
       setDisplayImage(
-        "http://localhost:4037/download/" + props.listing.images[0].filename
+        "/rest/v1/download/" + props.listing.images[0].filename
       );
     } else {
       let x = Math.random(1, 100);
