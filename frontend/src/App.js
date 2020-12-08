@@ -11,9 +11,9 @@ import Header from "./components/Header";
 import ListingList from "./components/ListingList";
 import About from "./components/About";
 import { useNotification } from "./providers/NotificationProvider";
+import ListView from "./components/ListView";
 
 function App() {
-
   const dispatch = useNotification();
 
   const handleNewNotification = () => {
@@ -30,9 +30,8 @@ function App() {
         <ListingContext>
           <MessageContext>
             <Header />
-            <button onClick={handleNewNotification}>test</button>
             <Switch>
-              <Route exact path="/" component={ListingList} />
+              <Route exact path="/" component={ListView} />
               <Route exact path="/upload-listing" component={ListingUpload} />
               <Route
                 exact
