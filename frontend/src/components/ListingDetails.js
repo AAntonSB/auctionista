@@ -2,7 +2,9 @@ import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router";
 import {} from "reactstrap";
 import { ListingContext } from "../contexts/ListingContextProvider";
+import  {sendMessage} from "../socket";
 import "../css/ListingDetails.css";
+
 
 const ListingDetails = (props) => {
   const listingContext = useContext(ListingContext);
@@ -15,9 +17,12 @@ const ListingDetails = (props) => {
     if (listing.images) {
       console.log(listing);
       setDisplayImage(
-        "http://localhost:4037/download/" + listing.images[0].filename
+        "/rest/v1/download/" + listing.images[0].filename
       );
     }
+
+    sendMessage("dude")
+
   }, []);
 
   async function fetchData() {
@@ -27,7 +32,7 @@ const ListingDetails = (props) => {
   useEffect(() => {
     if (listing.images) {
       setDisplayImage(
-        "http://localhost:4037/download/" + listing.images[0].filename
+        "/rest/v1/download/" + listing.images[0].filename
       );
     }
   }, [listing]);
@@ -55,7 +60,7 @@ const ListingDetails = (props) => {
     return (
       <>
         {date} {month}{" "}
-        {(hour.toString().length < 2 ? "0" + hour : hour) + ":" + min}
+        {(hour.toString().length <= 2 ? "0" + hour :  hour) + ":" + min}
       </>
     );
   };
