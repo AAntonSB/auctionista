@@ -40,10 +40,7 @@ const Header = () => {
         <div className="inner-header">
           <div className="logo-container">
             <h1>
-              <Link
-                to="/"
-                style={{ textDecoration: "none", color: "white" }}
-              >
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
                 <span>The</span> Auctionista
               </Link>
             </h1>
@@ -56,11 +53,15 @@ const Header = () => {
             <Link to="/about" className="navlink">
               <li>About</li>
             </Link>
-            <span className="navlink">
-              <li onClick={toggleLoginModal}>Login</li>
+            <span>
+              <Link to="/login-page" className="navlink">
+                <li>Login</li>
+              </Link>
             </span>
-            <span className="navlink">
-              <li onClick={toggleRegisterModal}>Register</li>
+            <span>
+              <Link to="/register-page" className="navlink">
+                <li>Register</li>
+              </Link>
             </span>
           </ul>
         </div>
