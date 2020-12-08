@@ -10,7 +10,10 @@ import ListingThumbnail from "./components/ListingThumbnail";
 import Header from "./components/Header";
 import ListingList from "./components/ListingList";
 import About from "./components/About";
+import LoginPage from "./components/LoginPage"
+import RegisterPage from "./components/RegisterPage";
 import { useNotification } from "./providers/NotificationProvider";
+import JohanLogin from "./components/JohanLogin";
 
 function App() {
 
@@ -30,7 +33,6 @@ function App() {
         <ListingContext>
           <MessageContext>
             <Header />
-            <button onClick={handleNewNotification}>test</button>
             <Switch>
               <Route exact path="/" component={ListingList} />
               <Route exact path="/upload-listing" component={ListingUpload} />
@@ -41,6 +43,8 @@ function App() {
               />
               <Route exact path="/thumbnail" component={ListingThumbnail} />
               <Route exact path="/about" component={About} />
+              <Route exact path="/login-page" component={LoginPage} />
+              <Route exact path="/register-page" component={RegisterPage}/>
             </Switch>
           </MessageContext>
         </ListingContext>
