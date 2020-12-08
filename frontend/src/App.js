@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Router, Route, Switch, BrowserRouter } from "react-router-dom";
 
 import "./App.css";
 import MessageContext from "./contexts/MessageContextProvider";
@@ -12,17 +12,16 @@ import Header from "./components/Header";
 import SearchBar from "./components/SearchBar";
 import ListingList from "./components/ListingList";
 import About from "./components/About";
-import NewMessage from "./components/NewMessage";
 
 function App() {
   return (
-    <BrowserRouter>
-      <div className="App">
-        <ListingContext>
-          <MessageContext>
-            <Header/>
+    <div className="App">
+      <ListingContext>
+        <MessageContext>
+          <BrowserRouter>
+            <Header />
             <Switch>
-          <Route exact path="/" component={ListingList} />
+              <Route exact path="/" component={ListingList} />
               <Route exact path="/upload-listing" component={ListingUpload} />
               <Route
                 exact
@@ -30,13 +29,12 @@ function App() {
                 component={ListingDetails}
               />
               <Route exact path="/thumbnail" component={ListingThumbnail} />
-              <Route exact path="/about" component={About}/>
-              <Route exact path="/message" component={NewMessage} />
+              <Route exact path="/about" component={About} />
             </Switch>
-          </MessageContext>
-        </ListingContext>
-      </div>
-    </BrowserRouter>
+          </BrowserRouter>
+        </MessageContext>
+      </ListingContext>
+    </div>
   );
 }
 

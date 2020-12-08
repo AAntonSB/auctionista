@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "reactstrap";
+import { Link } from "react-router-dom";
 import "../css/header.css";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
@@ -40,22 +41,19 @@ const Header = () => {
         <div className="inner-header">
           <div className="logo-container">
             <h1>
-              <NavLink
-                href="/"
-                style={{ textDecoration: "none", color: "white" }}
-              >
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
                 <span>The</span> Auctionista
-              </NavLink>
+              </Link>
             </h1>
           </div>
 
           <ul className="navigation">
-            <NavLink href="/" className="navlink">
+            <Link to="/" className="navlink">
               <li>Home</li>
-            </NavLink>
-            <NavLink href="/about" className="navlink">
+            </Link>
+            <Link to="/about" className="navlink">
               <li>About</li>
-            </NavLink>
+            </Link>
             <span className="navlink">
               <li onClick={toggleLoginModal}>Login</li>
             </span>

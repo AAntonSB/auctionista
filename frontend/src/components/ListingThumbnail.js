@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "reactstrap";
+import { Link } from "react-router-dom";
 import "../css/thumbnail.css";
 
 const ListingThumbnail = (props) => {
@@ -38,8 +38,8 @@ const ListingThumbnail = (props) => {
 
   return (
     <>
-      <NavLink
-        href={"/listing-details/" + props.listing.id}
+      <Link
+        to={"/listing-details/" + props.listing.id}
         className="card card-1"
         style={{ padding: "2px" }}
       >
@@ -54,7 +54,7 @@ const ListingThumbnail = (props) => {
         </span>
         <span className="myInline myAlignLeft">3 bud</span>
         <span className="myInline myAlignRight">{remainigTime()} </span>
-      </NavLink>
+      </Link>
     </>
   );
 };
