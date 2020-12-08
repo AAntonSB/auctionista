@@ -15,7 +15,7 @@ public class DownloadController {
     private static String frontendUploadDirectory = "/uploads/";
     private static String backendUploadDirectory = currentWorkingDirectory + "/src/main/resources/static" + frontendUploadDirectory;
 
-    @GetMapping("/download/{filename}")
+    @GetMapping("/rest/v1/download/{filename}")
     public Resource download(@PathVariable String filename){
         Path pathToFile = Path.of(currentWorkingDirectory + "/src/main/resources/static/uploads/" + filename);
         UrlResource resource = null;
