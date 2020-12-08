@@ -36,7 +36,7 @@ const ListingContextProvider = (props) => {
 
    const getListingsByString = async (searchString) => {
      let listings = await fetch(
-       "http://localhost:3000/rest/v1/listings/search/" + searchString
+       "/rest/v1/listings/search/" + searchString
      );
      listings = await listings.json();
 
