@@ -20,7 +20,7 @@ const Bidding = (props) => {
 
      console.log(credentials);
         let response = await fetch(
-          "http://localhost:3000/rest/v1/listings/bids",
+          "/rest/v1/listings/bids",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
