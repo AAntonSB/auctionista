@@ -2,7 +2,37 @@ import React, { useState } from "react";
 import "../css/RegisterModalCss.css";
 import { Modal } from "reactstrap";
 
-const LoginModal = () => {
+const RegisterModal = () => {
+
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [password2, setPassword2] = useState('')
+
+
+  async function springRegister(e) {
+    e.preventDefault()
+    const credentials = {
+      username,
+      password,
+      email
+    }
+  
+    let response = await fetch("/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials)
+    });
+
+    try {
+      response = await response.json()
+      //setUser(response)
+      //props.history.push('/')
+    } catch {
+      console.log('Bad credentials');
+    }
+  }
+
   return (
     <Modal isOpen={true} className="ModalMoves" autoFocus={false}>
       <button className="close-button topright">x</button>
@@ -20,6 +50,7 @@ const LoginModal = () => {
             autoFocus
             required
             className="inputFit"
+            onChange={e => setEmail(e.target.value)}
           />
         </section>
 
@@ -27,7 +58,11 @@ const LoginModal = () => {
           <label for="username" className="block-label">
             User name
           </label>
-          <input id="username" name="username" required className="inputFit" />
+          <input 
+            id="username" 
+            name="username"
+            required className="inputFit"
+            onChange={e => setUsername(e.target.value)}/>
         </section>
 
         <section>
@@ -42,6 +77,7 @@ const LoginModal = () => {
               autocomplete="new-password"
               aria-describedby="password-constraints"
               required
+              onChange={e => setPassword(e.target.value)}
             />
           </div>
           <div id="password-constraints" className="password-constraints-font">
@@ -60,14 +96,15 @@ const LoginModal = () => {
             autocomplete="new-password"
             required
             className="inputFit"
+            onChange={e => setPassword2(e.target.value)}
           />
         </section>
 
-        <button>Create account</button>
+        <button onClick={springRegister}>Create account</button>
         <p className="login-route">Already have an account? click me! </p>
       </form>
     </Modal>
   );
 };
 
-export default LoginModal;
+export default RegisterModal;
