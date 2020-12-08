@@ -33,33 +33,33 @@ const ListingDetails = (props) => {
     }
   }, [listing]);
 
-  const DisplayEndTime = () => {
-    let uni = new Date(listing.endDate * 1000);
-    let months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    let month = months[uni.getMonth()];
-    let date = uni.getDate();
-    let hour = uni.getHours();
-    let min = uni.getMinutes();
-    return (
-      <>
-        {date} {month}{" "}
-        {(hour.toString().length <= 2 ? "0" + hour :  hour) + ":" + min}
-      </>
-    );
-  };
+  // const DisplayEndTime = () => {
+  //   let uni = new Date(listing.endDate * 1000);
+  //   let months = [
+  //     "Jan",
+  //     "Feb",
+  //     "Mar",
+  //     "Apr",
+  //     "May",
+  //     "Jun",
+  //     "Jul",
+  //     "Aug",
+  //     "Sep",
+  //     "Oct",
+  //     "Nov",
+  //     "Dec",
+  //   ];
+  //   let month = months[uni.getMonth()];
+  //   let date = uni.getDate();
+  //   let hour = uni.getHours();
+  //   let min = uni.getMinutes();
+  //   return (
+  //     <>
+  //       {date} {month}{" "}
+  //       {(hour.toString().length <= 2 ? "0" + hour :  hour) + ":" + min}
+  //     </>
+  //   );
+  // };
 
   return (
     <div className="item-details-body">

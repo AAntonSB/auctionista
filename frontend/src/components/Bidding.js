@@ -9,7 +9,7 @@ const Bidding = (props) => {
   const listingContext = useContext(ListingContext);
   const [amount, setAmount] = useState("");
   const [listingBids, setListingBids] = useState([]);
-  const [highestBid, setHighestBid] = useState(SignalCellularNull);
+  const [highestBid, setHighestBid] = useState(props.startingBid)
   
   useEffect(()=>{
     console.log(props)
@@ -18,8 +18,17 @@ const Bidding = (props) => {
 
     async function fetchData() {
       setListingBids(await listingContext.getBidsFromListing(props.id));
-      setHighestBid(listingBids[0].amount);
+      console.log(listingBids, props.id);
+      if(listingBids[0]){
+        setHighestBid(listingBids[0].amount);
+      }else{
+        setHighestBid(props.startingBid)
+      }
     }
+
+    useEffect(()=>{
+      console.log(highestBid)
+    },[highestBid]);
 
 
   const createBid = async event => {
@@ -50,6 +59,7 @@ const Bidding = (props) => {
         } catch(err) {
           console.log("Bad credentials ", err);
         }
+        fetchData();
     }
 
   return (

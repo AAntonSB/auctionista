@@ -5,7 +5,6 @@ const ListingContextProvider = (props) => {
 
   const [listingList, setListings] = useState([]);
   const [listing, setListing] = useState([]);
-  const [bids, setBids] = useState([]);
 
   const appendListing = (listing) => {
 
@@ -52,7 +51,6 @@ const ListingContextProvider = (props) => {
          bids = await bids.json();
 
          console.log(bids);
-         setBids(bids);
          return bids; 
 
    }
@@ -61,7 +59,6 @@ const ListingContextProvider = (props) => {
   const values = {
     listingList,
     listing,
-    bids,
     appendListing,
     setCurrentListing,
     fetchAllListings,
