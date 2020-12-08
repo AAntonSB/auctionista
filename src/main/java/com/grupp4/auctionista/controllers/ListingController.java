@@ -1,7 +1,9 @@
 package com.grupp4.auctionista.controllers;
 
+import com.grupp4.auctionista.entities.Bid;
 import com.grupp4.auctionista.entities.Listing;
 
+import com.grupp4.auctionista.services.BidService;
 import com.grupp4.auctionista.services.ImageUploadService;
 import com.grupp4.auctionista.services.ListingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class ListingController {
     ListingService listingService;
 
     @Autowired
+    BidService bidService;
+
+    @Autowired
     private ImageUploadService imageUploadService;
 
     @GetMapping
@@ -40,6 +45,17 @@ public class ListingController {
         System.out.println("Listing Controller ");
         return ResponseEntity.ok(listingService.getListingsBySearchString(searchString));
     }
+
+    @GetMapping("/bids")
+    public List<Bid> getAllBids(){
+        return bidService.getAllBids();
+    }
+
+    @PostMapping("/bids")
+    public ResponseEntity<Bid> saveBid(@Validated @RequestBody Bid bid){
+        return ResponseEntity.ok(bidService.save(bid));
+    }
+
     @PostMapping
     public ResponseEntity<Listing> saveUser(@Validated @RequestBody Listing listing) {
         return ResponseEntity.ok(listingService.save(listing));
@@ -77,6 +93,7 @@ public class ListingController {
         return listingService.getById(id);
     }
      */
+
 
 
     @DeleteMapping("/{id}")
