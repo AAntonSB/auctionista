@@ -3,6 +3,7 @@ import { withRouter } from "react-router";
 import {} from "reactstrap";
 import { ListingContext } from "../contexts/ListingContextProvider";
 import "../css/ListingDetails.css";
+import Bidding from "./Bidding";
 
 const ListingDetails = (props) => {
   const listingContext = useContext(ListingContext);
@@ -81,7 +82,8 @@ const ListingDetails = (props) => {
           <p>{listing.description}</p>
         </div>
       </div>
-      <div className="payment-block">
+      <Bidding {...listing}/>
+      {/* <div className="payment-block">
         <div className="starting-price">
           <p className="payment-cursive-text center-text">Starting price</p>
           <p className="payment-regular-text center-text">
@@ -100,7 +102,7 @@ const ListingDetails = (props) => {
           <p className="payment-regular-text">bids {"0"}</p>
         </div>
         <div className="payment-component">Place payment component here</div>
-      </div>
+      </div> */}
     </div>
   );
 };
