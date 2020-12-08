@@ -19,7 +19,6 @@ const ListingContextProvider = (props) => {
      let listings = await fetch("/rest/v1/listings");
      listings = await listings.json();
 
-     console.log(listings);
      updateListings(listings);
    };
 
@@ -32,9 +31,20 @@ const ListingContextProvider = (props) => {
     let listing = await fetch("/rest/v1/listings/" + id);
     listing = await listing.json();
 
-      console.log(listing)
       return listing; 
    };
+
+   const getListingsByString = async (searchString) => {
+     let listings = await fetch(
+       "http://localhost:3000/rest/v1/listings/search/" + searchString
+     );
+     listings = await listings.json();
+
+     console.log(listings);
+     setListings(listings);
+     return listings; 
+
+   }
 
 
   const values = {
@@ -44,6 +54,7 @@ const ListingContextProvider = (props) => {
     setCurrentListing,
     fetchAllListings,
     fetchOneListing,
+    getListingsByString
   };
 
   return(

@@ -1,0 +1,128 @@
+.item-details-body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+.details-block {
+  margin-left: 15vw;
+  margin-top: 7vh;
+  display: inline-block;
+}
+
+.payment-block {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 7vh;
+  margin-left: 3vw;
+}
+
+.payment-component {
+  display: grid;
+  place-items: center;
+  text-align: center;
+  background-color: tomato;
+  height: 200px;
+  width: 300px;
+  flex-basis: 65%;
+  margin-bottom: 60vh;
+}
+
+.payment-regular-text {
+  font-family: 'Montserrat';
+  font-weight: 700;
+  font-size: 26px;
+  margin-top: 10px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.payment-cursive-text {
+  font-family: 'Montserrat';
+  font-weight: 200;
+}
+
+.starting-price {
+  display: inline-block;
+  height: 100px;
+}
+
+.end-time {
+  margin-left: 1.8vw;
+  max-width: 200px;
+  height: 100px;
+}
+
+.bids {
+  margin-left: 1.8vw;
+  display: inline-block;
+  height: 100px;
+}
+
+.title-font {
+  width: 600px;
+  font-weight: 700;
+  font-size: 25px;
+  grid-column: 2 / 12;
+}
+
+.image-showcase {
+  height: 400px;
+  width: 600px;
+  display: grid;
+  grid-template: auto 1fr auto / auto 1fr auto;
+}
+
+main {
+  background-color: rgb(245, 244, 245);
+  grid-column: 2 / 3;
+}
+
+.display-img {
+  max-height: 340px;
+}
+
+footer {
+  grid-column: 1 / 4;
+  background-color: rgb(238, 238, 238);
+}
+
+.circle {
+  height: 50px;
+  width: 50px;
+  border: 2px solid;
+  border-radius: 50%;
+  background-color: #222;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.circle .arrow {
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+  border: 2px solid;
+  border-right: none;
+  border-top: none;
+  margin: 14px 19px;
+  -webkit-transform: rotate(45deg);
+  color: white;
+}
+
+.rotate-right {
+  -webkit-transform: rotate(-180deg);
+}
+
+.left-align {
+  float: left;
+}
+
+.right-align {
+  float: right;
+}
+
+.item-detail-description {
+  width: 600px;
+}

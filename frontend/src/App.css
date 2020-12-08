@@ -3,5 +3,5 @@
 }
 
 input[type=email]:not(:placeholder-shown):invalid {
-  color: red
+  color: rgb(99, 35, 35)
 }

@@ -34,6 +34,12 @@ public class ListingController {
     public ResponseEntity<Listing> findListingById(@PathVariable UUID id) {
         return ResponseEntity.ok(listingService.getListingById(id));
     }
+
+    @GetMapping("search/{searchString}")
+    public ResponseEntity<List<Listing>> findListingsBySearchString(@PathVariable String searchString) {
+        System.out.println("Listing Controller ");
+        return ResponseEntity.ok(listingService.getListingsBySearchString(searchString));
+    }
     @PostMapping
     public ResponseEntity<Listing> saveUser(@Validated @RequestBody Listing listing) {
         return ResponseEntity.ok(listingService.save(listing));
