@@ -6,10 +6,12 @@ const TimeLeft = (props) => {
  const [timeLeft, setTimeLeft] = useState();
  let interval = null;
 
+
 useEffect(() => {
+
   if (isActive) {
     interval = setInterval(() => {
-      let distance = props.listing.endDate - new Date();
+      let distance = props.endDate - new Date();
       let days = Math.floor(distance / (1000 * 60 * 60 * 24));
       let hours = Math.floor(
         (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
@@ -32,13 +34,9 @@ useEffect(() => {
       setTimeLeft(time);
     }, 500);
   }
-}, [isActive, timeLeft]);
+}, [isActive, timeLeft, props.endDate]);
 
-return (
-  <p style={{ margin: "0px" }} className="thumbnail-name">
-    <strong>{props.listing.title}</strong>
-  </p>
-);
+return <span className="myInline myAlignRight">{timeLeft} </span>;
 
 }
 export default TimeLeft;

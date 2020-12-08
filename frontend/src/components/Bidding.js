@@ -1,13 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import { Row, Col, Card, CardText } from "reactstrap";
 import "../css/ListingDetails.css";
+import TimeLeft from "./TimeLeft";
 
 const Bidding = (props) => {
-
-
-  useEffect(() => {
-    console.log("props ", props);
-  }, []);
 
   return (
     <div className="payment-block">
@@ -22,7 +18,7 @@ const Bidding = (props) => {
           {" "}
           Ends
         </p>
-        <p className="payment-regular-text">Time to end</p>
+        <TimeLeft {...props} />
       </div>
       <div className="bids">
         <p className="payment-cursive-text">Bids</p>

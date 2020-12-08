@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "reactstrap";
 import "../css/thumbnail.css";
+import TimeLeft from "./TimeLeft";
 
 const ListingThumbnail = (props) => {
   const [displayImage, setDisplayImage] = useState();
@@ -68,7 +69,8 @@ const ListingThumbnail = (props) => {
           {props.listing.startingBid} kr
         </span>
         <span className="myInline myAlignLeft">3 bud</span>
-        <span className="myInline myAlignRight">{timeLeft} </span>
+        {/* <span className="myInline myAlignRight">{timeLeft} </span> */}
+        <TimeLeft {...props.listing} />
       </NavLink>
     </>
   );
