@@ -46,7 +46,7 @@ public class ListingController {
     }
 
     @PostMapping(value = "/tripple", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
-    public void createNewObjectWithImageSecond(
+    public ResponseEntity<Listing> createNewObjectWithImageSecond(
             @RequestPart Listing listing,
             @RequestPart List<MultipartFile> images){
         /*
@@ -68,7 +68,8 @@ public class ListingController {
         System.out.println("after setting images");
         newlisting.setImages(results);
         System.out.println(newlisting);
-        //System.out.println(listingService.getById(newlisting.getId()));
+
+        return ResponseEntity.ok(listingService.getListingById(newlisting.getId()));
 
     }
     /*

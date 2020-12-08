@@ -52,15 +52,19 @@ const ListingUpload = (props) => {
 
    const data = await fetch("/rest/v1/listings/tripple", {
     method: "post",
-    body: formData
-  });
+    body: formData });
 
-      try {
-        data = await data.json();
-        props.history.push("/listing-details/" + data.id);
-      } catch {
-        console.log("Bad credentials");
-      }
+  try {
+    let mydata = await data.json();
+    console.log(mydata);
+    props.history.push("/listing-details/" + mydata.id);
+    } catch (err) {
+      console.log(err)
+    console.log("Bad credentials");
+    console.log(data);
+    }
+
+
   /*
   const uploadedImage = await data.json();
   if (uploadedImage) {
