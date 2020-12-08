@@ -18,7 +18,7 @@ function App() {
 
   const handleNewNotification = () => {
     dispatch({
-      type: "ERROR",
+      type: "SUCCESS",
       message: "Hello world",
       title: "Successful Request",
     });

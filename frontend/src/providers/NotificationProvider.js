@@ -33,11 +33,11 @@ export const useNotification = () => {
   const dispatch = useContext(NotificationContext);
 
   return (props) => {
-    dispatch( {
+    dispatch({
       type: "ADD_NOTIFICATION",
       payload: { id: v4(), ...props },
-    })
-  }
+    });
+  };
 };
 
 export default NotificationProvider;
