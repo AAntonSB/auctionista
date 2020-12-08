@@ -9,7 +9,7 @@ function connect() {
   // change PORT to your backends PORT\
   ///your-socket-route
   //ws = new WebSocket("ws://localhost:4037/your-socket-route");
-  ws = new WebSocket("ws:/your-socket-route");
+  ws = new WebSocket("ws://localhost:4037/your-socket-route");
 
   ws.onmessage = (e) => {
     //fires when a message is recieved
