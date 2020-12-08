@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./notification.css";
+import "../css/notification.css";
 
 const Notification = (props) => {
   const [exit, setExit] = useState();
@@ -29,8 +29,8 @@ const Notification = (props) => {
     setTimeout(() => {
       props.dispatch({
         type: "REMOVE_NOTIFICATION",
-        id: props.id
-      })
+        id: props.id,
+      });
     }, 400);
   };
 
@@ -50,6 +50,7 @@ const Notification = (props) => {
         props.type === "SUCCESS" ? "success" : "error"
       } ${exit ? "exit" : ""}`}
     >
+      {props.title && <h2>{props.title}</h2>}
       <p>{props.message}</p>
       <div className="bar" style={{ width: `${width}%` }}></div>
     </div>

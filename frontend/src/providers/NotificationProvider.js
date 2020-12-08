@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useReducer } from "react";
 import { v4 } from "uuid";
 import Notification from "../components/Notification";
-import "./notification.css";
+import "../css/notification.css";
 
 const NotificationContext = createContext();
 
@@ -9,7 +9,7 @@ const NotificationProvider = (props) => {
   const [state, dispatch] = useReducer((state, action) => {
     switch (action.type) {
       case "ADD_NOTIFICATION":
-        return [...state, ...action.payload];
+        return [...state, { ...action.payload }];
       case "REMOVE_NOTIFICATION":
         return state.filter((el) => el.id !== action.id);
       default:
@@ -33,11 +33,11 @@ export const useNotification = () => {
   const dispatch = useContext(NotificationContext);
 
   return (props) => {
-    dispatch({
+    dispatch( {
       type: "ADD_NOTIFICATION",
       payload: { id: v4(), ...props },
-    });
-  };
+    })
+  }
 };
 
 export default NotificationProvider;
