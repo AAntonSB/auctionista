@@ -28,6 +28,11 @@
   margin-bottom: 60vh;
 }
 
+.payment-box{
+  display: block;
+  
+}
+
 .payment-regular-text {
   font-family: 'Montserrat';
   font-weight: 100;
@@ -78,6 +83,14 @@
 .bidding-p{
   width: 50px;
   margin: 0px;
+}
+
+.bidding-label{
+  text-align: left;
+}
+
+input[type="text"]::placeholder{
+  text-align: right;
 }
 
 .title-font {
