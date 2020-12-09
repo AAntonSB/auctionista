@@ -74,4 +74,11 @@ section {
 .screen {
   width: 100vw;
   height: 100vh;
+  text-align: center;
+  display: grid;
+  place-items: center;
+}
+
+.login-block {
+  margin-block-end: auto;
 }

@@ -64,9 +64,9 @@ const Header = () => {
             <Link to="/user-login" className="navlink">
               <li>Login</li>
             </Link>
-            <span className="navlink">
-              <li onClick={toggleRegisterModal}>Register</li>
-            </span>
+            <Link to="/register" className="navlink">
+              <li >Register</li>
+            </Link>
             <Link to="/upload-listing" className="navlink">
               <li>Make listing</li>
             </Link>

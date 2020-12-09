@@ -28,10 +28,15 @@
   margin-bottom: 60vh;
 }
 
+.payment-box{
+  display: block;
+  
+}
+
 .payment-regular-text {
   font-family: 'Montserrat';
-  font-weight: 700;
-  font-size: 26px;
+  font-weight: 100;
+  font-size: 12px;
   margin-top: 10px;
 }
 
@@ -39,20 +44,29 @@
   text-align: center;
 }
 
+.bidding-col{
+  width:70px; 
+  margin-right:0px;
+}
+
 .payment-cursive-text {
   font-family: 'Montserrat';
-  font-weight: 200;
+  font-weight: 300;
+  font-size: 12px;
+  width: 100px;
+  margin:0px;
 }
 
 .starting-price {
   display: inline-block;
-  height: 100px;
+  height: 20px;
 }
 
 .end-time {
   margin-left: 1.8vw;
-  max-width: 200px;
+  width: 50px; 
   height: 100px;
+  margin:0px;
 }
 
 .bids {
@@ -60,6 +74,21 @@
   display: inline-block;
   height: 100px;
 }
+
+.bidding-info{
+  width: 300px; 
+  height: 70px;
+}
+
+.bidding-p{
+  width: 50px;
+  margin: 0px;
+}
+
+.bidding-label{
+  text-align: left;
+}
+
 
 .title-font {
   width: 600px;

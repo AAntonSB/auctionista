@@ -2,31 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { NavLink } from "reactstrap";
 import "../css/thumbnail.css";
+import TimeLeft from "./TimeLeft";
 
 const ListingThumbnail = (props) => {
   const [displayImage, setDisplayImage] = useState();
   const [isActive, setIsActive] = useState(true);
   const [timeLeft, setTimeLeft] = useState();
   let interval = null;
-  // const [seconds, setSeconds] = useState();
-    // function remainigTime() {
-  //   let distance = props.listing.endDate - new Date();
-  //   let days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  //   let hours = Math.floor(
-  //     (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  //   );
-  //   let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  //   let seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-
-  //   let time = null;
-  //   if (Math.trunc(days) >= 1) {
-  //     time = Math.round(days) + " days left";
-  //   } else if (Math.trunc(days) < 1) {
-  //     time = hours + "h " + minutes + "m " + seconds + "s ";
-  //   }
-  //   return time;
-  // }
 
   useEffect(() => {
     
@@ -70,6 +53,8 @@ const ListingThumbnail = (props) => {
     }
   }, [props.listing]);
 
+  //<span className="myInline myAlignRight">{timeLeft} </span>
+
   return (
     <>
       <Link
@@ -87,8 +72,11 @@ const ListingThumbnail = (props) => {
           {props.listing.startingBid} kr
         </span>
         <span className="myInline myAlignLeft">3 bud</span>
-        <span className="myInline myAlignRight">{timeLeft} </span>
+        <TimeLeft {...props.listing} />
       </Link>
+        {/* <span className="myInline myAlignRight">{timeLeft} </span> */}
+       
+      
     </>
   );
 };

@@ -74,7 +74,9 @@ const LoginPage = (props) => {
   */
 
   return (
+      
       <div className="screen">
+          <div className="login-block">
         <form className="loginpage-center">
           <h1>Login</h1>
           <section>
@@ -107,9 +109,11 @@ const LoginPage = (props) => {
 
         </form>
         <button onClick={springLogin}>Login</button>
-          <p className="login-route">
+           <Link to="/register"><p className="login-route">
             Don't have an account? no problemos, click me!
           </p>
+          </Link>
+          </div>
       </div>
   );
 };
