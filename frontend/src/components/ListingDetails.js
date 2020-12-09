@@ -4,6 +4,7 @@ import {} from "reactstrap";
 import { ListingContext } from "../contexts/ListingContextProvider";
 import "../css/ListingDetails.css";
 import Bidding from "./Bidding";
+import Biddingoriginial from "./Biddingoriginial";
 
 const ListingDetails = (props) => {
   const listingContext = useContext(ListingContext);
@@ -82,7 +83,7 @@ const ListingDetails = (props) => {
           <p>{listing.description}</p>
         </div>
       </div>
-      <Bidding {...listing}/>
+      <Biddingoriginial {...listing}/>
       {/* <div className="payment-block">
         <div className="starting-price">
           <p className="payment-cursive-text center-text">Starting price</p>

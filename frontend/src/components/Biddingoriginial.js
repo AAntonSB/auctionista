@@ -8,73 +8,25 @@ const Bidding = (props) => {
   const [amount, setAmount] = useState("");
   const [listingBids, setListingBids] = useState([]);
   const [highestBid, setHighestBid] = useState(props.startingBid)
-  const [numberOfBids, setNumberOfBids] = useState("");
   
   useEffect(()=>{
-
-    console.log(props)
-    /*
-    async function fetchMyListing() {
-      let mylisting = await fetch("/rest/v1/listings" + props.id)
-      console.log(mylisting)
-    }
-    */
-
     console.log(props)
     fetchData();
-    console.log(listingBids);
-    //fetchMyListing();
   },[props]);
-
-
-
-
 
     async function fetchData() {
       console.log(await listingContext.getBidsFromListing(props.id));
-      setListingBids(await listingContext.getBidsFromListing(props.id));
+        setListingBids(await listingContext.getBidsFromListing(props.id));
     }
-    /*
-    useEffect(() => {​​
 
-      console.log(listingBids)
-
-            if (listingBids[0]) {​​
-
-              setHighestBid(listingBids[0].amount);
-
-            }​​ else {​​
-
-              setHighestBid(props.startingBid);
-
-            }​​
-
-    }​​,[listingBids]);
-        useEffect(()=>{
-      console.log(listingBids)
-            if (listingBids[0]) {
-              setHighestBid(listingBids[0].amount);
-              setNumberOfBids(listingBids.length)
-            } else {
-              setHighestBid(props.startingBid);
-              setNumberOfBids("0")
-            }
-    },[props]);
-
-    */
-
-    
     useEffect(()=>{
       console.log(listingBids)
             if (listingBids[0]) {
               setHighestBid(listingBids[0].amount);
-              setNumberOfBids(listingBids.length)
             } else {
               setHighestBid(props.startingBid);
-              setNumberOfBids("0")
             }
     },[listingBids]);
-  
 
 
   const createBid = async event => {
@@ -111,7 +63,7 @@ const Bidding = (props) => {
   return (
     <div className="payment-block">
       <div className="starting-price">
-        <p className="payment-cursive-text">Current bid</p>
+        <p className="payment-cursive-text">Highest bid</p>
         <p className="payment-regular-text">{highestBid} kr</p>
       </div>
       <div className="end-time">
@@ -120,7 +72,7 @@ const Bidding = (props) => {
       </div>
       <div className="bids">
         <p className="payment-cursive-text">Bids</p>
-        <p className="payment-regular-text">{numberOfBids}</p>
+        <p className="payment-regular-text">{listingBids.length}</p>
       </div>
       <div className="payment-component">
         <div className="payment-box">
@@ -129,6 +81,7 @@ const Bidding = (props) => {
             type="text"
             id="bidding-input"
             placeholder="kr"
+            autoComplete="off"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           ></input>

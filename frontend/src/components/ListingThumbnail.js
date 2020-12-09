@@ -8,6 +8,7 @@ const ListingThumbnail = (props) => {
   const [displayImage, setDisplayImage] = useState();
   const [isActive, setIsActive] = useState(true);
   const [timeLeft, setTimeLeft] = useState();
+  const [actualPrice, setActualPrice] = useState();
   let interval = null;
 
 
@@ -43,7 +44,7 @@ const ListingThumbnail = (props) => {
 
   useEffect(() => {
     if (props.listing.images[0]) {
-      console.log(props.listing.images[0].filename);
+      //console.log(props.listing.images[0].filename);
       setDisplayImage(
         "/rest/v1/download/" + props.listing.images[0].filename
       );
@@ -51,9 +52,20 @@ const ListingThumbnail = (props) => {
       let x = Math.random(1, 100);
       setDisplayImage("https://picsum.photos/300/200?random=" + x);
     }
+
+    if (props.listing.simplebids.length > 0){
+      console.log("does this work?")
+      let allbids = props.listing.simplebids
+      console.log(allbids)
+      allbids.sort(function(a, b){return b-a})
+      console.log(allbids)
+      setActualPrice(allbids[0])
+    } else {
+      setActualPrice(props.listing.startingBid)
+    }
   }, [props.listing]);
 
-  //<span className="myInline myAlignRight">{timeLeft} </span>
+  //<span className="myInline myAlignRight">{timeLeft} </span>  {actualPrice}
 
   return (
     <>
@@ -69,9 +81,9 @@ const ListingThumbnail = (props) => {
           <strong>{props.listing.title}</strong>
         </p>
         <span className="myInline myAlignLeft" style={{ paddingRight: "10px" }}>
-          {props.listing.startingBid} kr
+          {actualPrice} kr
         </span>
-        <span className="myInline myAlignLeft">3 bud</span>
+        <span className="myInline myAlignLeft">{props.listing.simplebids.length} bud</span>
         <TimeLeft {...props.listing} />
       </Link>
         {/* <span className="myInline myAlignRight">{timeLeft} </span> */}
