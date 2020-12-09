@@ -39,7 +39,7 @@ const LoginModal = () => {
     } else {
       console.log("Successfully logged in");
       fetchUser();
-      <Redirect  to="/" />;
+      //<Redirect  to="/" />;
     }
     fetchUser();
   }

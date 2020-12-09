@@ -26,6 +26,7 @@ const ListingList = (props) => {
     }
   };
 
+  
   useEffect(() => {
 
     
@@ -52,10 +53,10 @@ const ListingList = (props) => {
     async function springLogin() {
       console.log("we should see this")
 
-      let response = await springReturns()
-      console.log(response)
+      //let response = await springReturns()
+      //console.log(response)
 
-      /*
+      
       const credentials =
         "username=" +
         encodeURIComponent("user") +
@@ -68,7 +69,7 @@ const ListingList = (props) => {
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: credentials
       });
-      */
+      
   
 
       console.log("we hope we see this")
@@ -83,9 +84,10 @@ const ListingList = (props) => {
       }
     }
 
-    springLogin();
+    //springLogin();
     fetchUser();
   }, []);
+  
 
   useEffect(() => {
     console.log(listingContext.listingList);

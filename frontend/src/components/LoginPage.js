@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import "../css/RegisterModalCss.css";
 
-const LoginModal = () => {
+const LoginPage = (props) => {
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   
   async function springLogin() {
-    console.log("Spring login")
     //e.preventDefault()
+    console.log("Spring login")
+    //
     const credentials =
       "username=" +
       encodeURIComponent(username) +
@@ -21,13 +22,14 @@ const LoginModal = () => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: credentials
     });
+    console.log("we want to see this")
 
-    console.log("dude")
-    console.log(response)
-    console.log(response.url)
-    console.log("dude")
+    //console.log("dude")
+    //console.log(response)
+    //console.log(response.url)
+    //console.log("dude")
 
-    response = await response.json();
+    //response = await response.json();
     console.log("dude")
     console.log(response)
     console.log(response.url)
@@ -38,14 +40,17 @@ const LoginModal = () => {
     } else {
       console.log("Successfully logged in");
       fetchUser();
-      <Redirect  to="/" />;
+      props.history.push("/");
     }
-    fetchUser();
+    //fetchUser();
   }
 
   const fetchUser = async () => {
     console.log("fetching user")
-  let res = await fetch('/rest/v1/user/auth/whoami')
+  let res = await fetch('/auth/whoami')
+  //console.log(res);
+  //res = await res.json()
+  //console.log(res);
   try {
     res = await res.json()
     //setUser(res)
@@ -109,4 +114,4 @@ const LoginModal = () => {
   );
 };
 
-export default LoginModal;
+export default LoginPage;

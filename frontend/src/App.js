@@ -43,7 +43,7 @@ function App() {
               />
               <Route exact path="/thumbnail" component={ListingThumbnail} />
               <Route exact path="/about" component={About} />
-              <Route exact path="/login-page" component={LoginPage} />
+              <Route exact path="/user-login" component={LoginPage} />
               <Route exact path="/johan-login" component={JohanLogin} />
             </Switch>
           </MessageContext>
