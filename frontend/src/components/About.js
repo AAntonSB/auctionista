@@ -2,7 +2,6 @@ import React from "react";
 import '../css/About.css'
 
 const About = () => {
-  document.body.style.overflow = "hidden";
 
   return (
     <div class="parent white">

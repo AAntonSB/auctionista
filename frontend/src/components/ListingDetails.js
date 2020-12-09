@@ -83,26 +83,6 @@ const ListingDetails = (props) => {
         </div>
       </div>
       <Bidding {...listing}/>
-      {/* <div className="payment-block">
-        <div className="starting-price">
-          <p className="payment-cursive-text center-text">Starting price</p>
-          <p className="payment-regular-text center-text">
-            {listing.startingBid} kr
-          </p>
-        </div>
-        <div className="end-time">
-          <p className="payment-cursive-text center-text">
-            {" "}
-            Ends <DisplayEndTime />
-          </p>
-          <p className="payment-regular-text">Time to end</p>
-        </div>
-        <div className="bids">
-          <p className="payment-cursive-text center-text">Bids</p>
-          <p className="payment-regular-text">bids {"0"}</p>
-        </div>
-        <div className="payment-component">Place payment component here</div>
-      </div> */}
     </div>
   );
 };

@@ -12,11 +12,11 @@ const Bidding = (props) => {
   useEffect(()=>{
     console.log(props)
     fetchData();
-  },[]);
+  },[props]);
 
     async function fetchData() {
       console.log(await listingContext.getBidsFromListing(props.id));
-      setListingBids(await listingContext.getBidsFromListing(props.id));
+        setListingBids(await listingContext.getBidsFromListing(props.id));
     }
 
     useEffect(()=>{
@@ -81,6 +81,7 @@ const Bidding = (props) => {
             type="text"
             id="bidding-input"
             placeholder="kr"
+            autoComplete="off"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
           ></input>

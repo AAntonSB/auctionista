@@ -8,7 +8,7 @@ const ListingContextProvider = (props) => {
 
   const appendListing = (listing) => {
 
-    setListings([...listingList, listing])
+    setListings(listing);
   };
 
   const updateListings = (updates) => {
@@ -19,7 +19,7 @@ const ListingContextProvider = (props) => {
      let listings = await fetch("/rest/v1/listings");
      listings = await listings.json();
 
-     updateListings(listings);
+     appendListing(listings);
    };
 
    const setCurrentListing = (listing) => {
