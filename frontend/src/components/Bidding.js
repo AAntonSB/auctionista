@@ -1,9 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
-import { Row, Col, Card, CardText } from "reactstrap";
 import "../css/ListingDetails.css";
 import TimeLeft from "./TimeLeft";
 import { ListingContext } from "../contexts/ListingContextProvider";
-import { SignalCellularNull } from "@material-ui/icons";
 
 const Bidding = (props) => {
   const listingContext = useContext(ListingContext);
@@ -17,18 +15,18 @@ const Bidding = (props) => {
   },[]);
 
     async function fetchData() {
+      console.log(await listingContext.getBidsFromListing(props.id));
       setListingBids(await listingContext.getBidsFromListing(props.id));
-      console.log(listingBids, props.id);
-      if(listingBids[0]){
-        setHighestBid(listingBids[0].amount);
-      }else{
-        setHighestBid(props.startingBid)
-      }
     }
 
     useEffect(()=>{
-      console.log(highestBid)
-    },[highestBid]);
+      console.log(listingBids)
+            if (listingBids[0]) {
+              setHighestBid(listingBids[0].amount);
+            } else {
+              setHighestBid(props.startingBid);
+            }
+    },[listingBids]);
 
 
   const createBid = async event => {
@@ -56,8 +54,8 @@ const Bidding = (props) => {
         console.log(response);
         try {
           response = await response.json();
-        } catch(err) {
-          console.log("Bad credentials ", err);
+        } catch {
+          console.log("Bad credentials ");
         }
         fetchData();
     }
