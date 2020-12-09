@@ -33,6 +33,11 @@ const Header = () => {
       return <></>;
     }
   };
+  /*
+              <span className="navlink">
+              <li onClick={toggleLoginModal}>Login</li>
+            </span>
+  */
 
   return (
     <div>
@@ -56,12 +61,15 @@ const Header = () => {
             <Link to="/about" className="navlink">
               <li>About</li>
             </Link>
-            <span className="navlink">
-              <li onClick={toggleLoginModal}>Login</li>
-            </span>
+            <Link to="/user-login" className="navlink">
+              <li>Login</li>
+            </Link>
             <span className="navlink">
               <li onClick={toggleRegisterModal}>Register</li>
             </span>
+            <Link to="/upload-listing" className="navlink">
+              <li>Make listing</li>
+            </Link>
           </ul>
         </div>
       </div>

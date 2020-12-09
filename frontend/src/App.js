@@ -25,14 +25,14 @@ function App() {
       title: "Successful Request",
     });
   };
-
+  //{/*<button onClick={handleNewNotification}>test</button>*/}
   return (
     <BrowserRouter>
       <div className="App">
         <ListingContext>
           <MessageContext>
             <Header />
-            <button onClick={handleNewNotification}>test</button>
+            
             <Switch>
               <Route exact path="/" component={ListingList} />
               <Route exact path="/upload-listing" component={ListingUpload} />
