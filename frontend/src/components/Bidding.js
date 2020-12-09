@@ -72,7 +72,7 @@ const Bidding = (props) => {
       </div>
       <div className="bids">
         <p className="payment-cursive-text">Bids</p>
-        <p className="payment-regular-text">bids {"0"}</p>
+        <p className="payment-regular-text">{listingBids.length}</p>
       </div>
       <div className="payment-component">
         <div className="payment-box">
