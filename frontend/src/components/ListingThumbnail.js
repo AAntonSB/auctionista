@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { NavLink } from "reactstrap";
 import "../css/thumbnail.css";
 import TimeLeft from "./TimeLeft";
@@ -54,8 +55,8 @@ const ListingThumbnail = (props) => {
 
   return (
     <>
-      <NavLink
-        href={"/listing-details/" + props.listing.id}
+      <Link
+        to={"/listing-details/" + props.listing.id}
         className="card card-1"
         style={{ padding: "2px" }}
       >
@@ -71,7 +72,7 @@ const ListingThumbnail = (props) => {
         <span className="myInline myAlignLeft">3 bud</span>
         {/* <span className="myInline myAlignRight">{timeLeft} </span> */}
         <TimeLeft {...props.listing} />
-      </NavLink>
+      </Link>
     </>
   );
 };
