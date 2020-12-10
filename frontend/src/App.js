@@ -4,6 +4,7 @@ import { Route, Switch, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import MessageContext from "./contexts/MessageContextProvider";
 import ListingContext from "./contexts/ListingContextProvider";
+import AuthContext from "./contexts/AuthContextProvider";
 import ListingUpload from "./pages/ListingUpload";
 import ListingDetails from "./components/ListingDetails";
 import ListingThumbnail from "./components/ListingThumbnail";
@@ -12,7 +13,6 @@ import ListingList from "./components/ListingList";
 import About from "./components/About";
 import LoginPage from "./components/LoginPage"
 import { useNotification } from "./providers/NotificationProvider";
-import JohanLogin from "./components/JohanLogin";
 import RegisterPage from "./components/RegisterPage"
 
 function App() {
@@ -30,6 +30,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="App">
+        <AuthContext>
         <ListingContext>
           <MessageContext>
             <Header />
@@ -45,11 +46,11 @@ function App() {
               <Route exact path="/thumbnail" component={ListingThumbnail} />
               <Route exact path="/about" component={About} />
               <Route exact path="/user-login" component={LoginPage} />
-              <Route exact path="/johan-login" component={JohanLogin} />
               <Route exact path="/register" component={RegisterPage} />
             </Switch>
           </MessageContext>
         </ListingContext>
+        </AuthContext>
       </div>
     </BrowserRouter>
   );

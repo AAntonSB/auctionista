@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Link, Redirect } from "react-router-dom";
+import { AuthContext } from "../contexts/AuthContextProvider";
 import "../css/RegisterModalCss.css";
 
 const LoginPage = (props) => {
   
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const { fetchUser } = useContext(AuthContext);
   
   async function springLogin() {
     //e.preventDefault()
@@ -22,7 +24,7 @@ const LoginPage = (props) => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: credentials
     });
-    console.log("we want to see this")
+    //console.log("we want to see this")
 
     //console.log("dude")
     //console.log(response)
@@ -30,10 +32,10 @@ const LoginPage = (props) => {
     //console.log("dude")
 
     //response = await response.json();
-    console.log("dude")
-    console.log(response)
-    console.log(response.url)
-    console.log("dude")
+    //console.log("dude")
+    //console.log(response)
+    //console.log(response.url)
+    //console.log("dude")
 
     if (response.url.includes("error")) {
       console.log("Wrong username/password");
@@ -44,7 +46,7 @@ const LoginPage = (props) => {
     }
     //fetchUser();
   }
-
+  /*
   const fetchUser = async () => {
     console.log("fetching user")
   let res = await fetch('/auth/whoami')
@@ -61,6 +63,7 @@ const LoginPage = (props) => {
   }
 
   }
+  */
   
   /* 
                 autoComplete="email"

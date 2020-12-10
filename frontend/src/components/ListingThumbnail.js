@@ -54,11 +54,11 @@ const ListingThumbnail = (props) => {
     }
 
     if (props.listing.simplebids.length > 0){
-      console.log("does this work?")
+      //console.log("does this work?")
       let allbids = props.listing.simplebids
-      console.log(allbids)
+      //console.log(allbids)
       allbids.sort(function(a, b){return b-a})
-      console.log(allbids)
+      //console.log(allbids)
       setActualPrice(allbids[0])
     } else {
       setActualPrice(props.listing.startingBid)
