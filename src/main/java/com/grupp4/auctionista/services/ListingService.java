@@ -40,8 +40,8 @@ public class ListingService {
     }
 
     public List<Listing> getListingsBySearchString(String searchString) {
-
-        List<Listing> listings = listingRepo.findByTitleContainingIgnoreCase(searchString);
+        
+            List<Listing> listings = listingRepo.findByTitleContainingIgnoreCase(searchString);
 
         System.out.println(listings);
         return listings;
