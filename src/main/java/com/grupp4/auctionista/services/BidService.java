@@ -21,7 +21,11 @@ public class BidService {
     }
 
     public Bid save(Bid bid) {
-        return bidRepo.save(bid);
+        System.out.println(bid);
+
+        Bid newbid = bidRepo.save(bid);
+
+        return newbid;
     }
 
     public List<Bid> getBidsByListingId(UUID listingId) {

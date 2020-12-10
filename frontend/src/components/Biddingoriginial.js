@@ -3,7 +3,7 @@ import "../css/ListingDetails.css";
 import TimeLeft from "./TimeLeft";
 import { ListingContext } from "../contexts/ListingContextProvider";
 
-const Bidding = (props) => {
+const Biddingoriginial = (props) => {
   const listingContext = useContext(ListingContext);
   const [amount, setAmount] = useState("");
   const [listingBids, setListingBids] = useState([]);
@@ -92,4 +92,4 @@ const Bidding = (props) => {
   );
 }
 
-export default Bidding; 
+export default Biddingoriginial; 

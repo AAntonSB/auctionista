@@ -13,6 +13,10 @@ const Bidding = (props) => {
   useEffect(()=>{
 
     console.log(props)
+    const fetchmylisting = async () =>{
+      var thislisting = await fetch("/rest/v1/listings" + props.id)
+      console.log(thislisting)
+     }
     /*
     async function fetchMyListing() {
       let mylisting = await fetch("/rest/v1/listings" + props.id)
@@ -22,17 +26,22 @@ const Bidding = (props) => {
 
     console.log(props)
     fetchData();
+    console.log("after fetch comes listingBids")
     console.log(listingBids);
-    //fetchMyListing();
+    fetchmylisting();
   },[props]);
 
-
-
+  
+  const fetchmylisting = async () =>{
+    var thislisting = await fetch("/rest/v1/listings" + props.id)
+    console.log(thislisting)
+   }
 
 
     async function fetchData() {
       console.log(await listingContext.getBidsFromListing(props.id));
       setListingBids(await listingContext.getBidsFromListing(props.id));
+      console.log(listingBids);
     }
     /*
     useEffect(() => {​​

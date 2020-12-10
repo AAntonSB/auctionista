@@ -83,7 +83,7 @@ const ListingDetails = (props) => {
           <p>{listing.description}</p>
         </div>
       </div>
-      <Biddingoriginial {...listing}/>
+      <Bidding {...listing}/>
       {/* <div className="payment-block">
         <div className="starting-price">
           <p className="payment-cursive-text center-text">Starting price</p>

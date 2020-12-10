@@ -20,9 +20,18 @@ public class Bid {
     @JsonIgnore
     private UUID bidId;
     //private UUID bidderId;
-    @JsonIgnore
+    //@JsonIgnore
     private UUID listingId;
     private double amount;
     private Long timestamp;
 
+    @Override
+    public String toString() {
+        return "Bid{" +
+                "bidId=" + bidId +
+                ", listingId=" + listingId +
+                ", amount=" + amount +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }
