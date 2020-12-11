@@ -18,8 +18,8 @@ const ListingList = (props) => {
 
   useEffect(async () => {
     await listingContext.fetchAllListings();
-    let newlists = await fetchAllListings();
-    setListingList(newlists)
+    //let newlists = await fetchAllListings();
+    //setListingList(newlists)
   }, []);
 
   const fetchUser = async () => {
