@@ -8,6 +8,7 @@ const Bidding = (props) => {
   const [amount, setAmount] = useState("");
   const [listingBids, setListingBids] = useState([]);
   const [highestBid, setHighestBid] = useState(props.startingBid)
+  const [isVisible, setIsVisible] = useState(false); 
   
   useEffect(()=>{
     console.log(props)
@@ -31,6 +32,7 @@ const Bidding = (props) => {
 
   const createBid = async event => {
 
+setIsVisible(false);
     let timestamp = Date.now(); 
     let listingId = props.id;
 
@@ -40,6 +42,8 @@ const Bidding = (props) => {
        amount: amount,
        timestamp: timestamp
      };
+
+     if(highestBid < amount){
 
      console.log(credentials);
         let response = await fetch(
@@ -56,6 +60,9 @@ const Bidding = (props) => {
           response = await response.json();
         } catch {
           console.log("Bad credentials ");
+        }
+        }else{
+          setIsVisible(true);
         }
         fetchData();
     }
@@ -86,6 +93,10 @@ const Bidding = (props) => {
             onChange={(e) => setAmount(e.target.value)}
           ></input>
         </div>
+        
+        {isVisible?
+          <div id="input-text">Bid must be higher than current highest bid</div>
+          :""}
         <button onClick={createBid}>Submit</button>
       </div>
     </div>
