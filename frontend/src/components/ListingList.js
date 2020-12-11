@@ -7,6 +7,12 @@ import SearchBar from "./SearchBar";
 import { useNotification } from "../providers/NotificationProvider";
 
 const ListingList = (props) => {
+  const [response, setResponse] = useState({});
+
+  const updateResponse = (update) => {
+    setResponse({ ...response, ...update });
+  };
+
   const listingContext = useContext(ListingContext);
   const [ListingList, setListingList] = useState([]);
 
@@ -36,10 +42,25 @@ const ListingList = (props) => {
   const searchAllListings = async (searchString) => {
     let searchresults = await listingContext.getListingsByString(searchString)
   }
+  /*
+  useEffect(() => {
+    console.log("we hope we see this");
+    console.log(response);
 
+    // if (response.url.includes("error")) {
+    //   console.log("Wrong username/password");
+    // } else {
+    //   console.log("Successfully logged in");
+    //   //fetchUser();
+    //   //props.history.push("/");
+    // }
+  }, [response]);
+  */
+  /*
   useEffect(() => {
     console.log(listingContext.listingList);
   }, [listingContext.listingList]);
+  */
 
   return (
     <div>

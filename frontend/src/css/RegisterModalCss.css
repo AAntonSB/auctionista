@@ -2,7 +2,6 @@ body {
   padding-right: 0px !important;
 }
 
-
 .passwordBox {
   height: 21.25px;
 }
@@ -44,12 +43,7 @@ section {
   display: block;
 }
 
-.loginpage-center {
-  display:grid;
-  place-items: center;
-
-
-}
+.loginpage-center {}
 
 .close-button {
   border: none;
@@ -71,14 +65,14 @@ section {
   top: 0
 }
 
+.login-block {
+  margin-block-end: auto;
+}
+
 .screen {
   width: 100vw;
   height: 100vh;
   text-align: center;
   display: grid;
   place-items: center;
-}
-
-.login-block {
-  margin-block-end: auto;
 }

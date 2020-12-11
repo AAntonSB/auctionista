@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import "../css/RegisterModalCss.css";
 
-export default function RegisterPage() {
+export default function RegisterPage(props) {
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [password2, setPassword2] = useState('')
+    const myHistory = useHistory()
     
     async function springRegister(e) {
         e.preventDefault()
@@ -26,7 +27,7 @@ export default function RegisterPage() {
         try {
           response = await response.json()
           //setUser(response)
-          //props.history.push('/')
+          props.history.push('/')
         } catch {
           console.log('Bad credentials');
         }

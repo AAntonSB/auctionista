@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import "../css/header.css";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
@@ -9,6 +9,7 @@ const Header = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);
   const [showRegisterModal, setShowRegisterModal] = useState(false);
   const { user, setUser } = useContext(AuthContext);
+  const myHistory = useHistory()
 
   const toggleLoginModal = () => {
     setShowLoginModal(!showLoginModal);
@@ -39,8 +40,7 @@ const Header = () => {
   const logout = () => {
     fetch('/logout')
     setUser(null)
-    props.history.push("/");
-    //console.log('Logging out');
+    myHistory.push("/")
   }
   /*
               <span className="navlink">
@@ -54,10 +54,7 @@ const Header = () => {
         <div className="inner-header">
           <div className="logo-container">
             <h1>
-              <Link
-                to="/"
-                style={{ textDecoration: "none", color: "white" }}
-              >
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
                 <span>The</span> Auctionista
               </Link>
             </h1>

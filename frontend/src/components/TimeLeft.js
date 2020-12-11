@@ -35,8 +35,8 @@ useEffect(() => {
 
 
       setTimeLeft(time);
-      console.log("time left is: " + timeLeft  +" at " + props.id + "at timestamp " + new Date())
-      console.log("time change is: " + time  +" at " + props.id)
+      //console.log("time left is: " + timeLeft  +" at " + props.id + "at timestamp " + new Date())
+      //console.log("time change is: " + time  +" at " + props.id)
     }, 1000);
   }
   return () => clearInterval(interval);

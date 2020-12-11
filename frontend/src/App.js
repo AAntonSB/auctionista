@@ -12,8 +12,8 @@ import Header from "./components/Header";
 import ListingList from "./components/ListingList";
 import About from "./components/About";
 import LoginPage from "./components/LoginPage"
+import RegisterPage from "./components/RegisterPage";
 import { useNotification } from "./providers/NotificationProvider";
-import RegisterPage from "./components/RegisterPage"
 
 function App() {
 
@@ -34,7 +34,6 @@ function App() {
         <ListingContext>
           <MessageContext>
             <Header />
-            
             <Switch>
               <Route exact path="/" component={ListingList} />
               <Route exact path="/upload-listing" component={ListingUpload} />

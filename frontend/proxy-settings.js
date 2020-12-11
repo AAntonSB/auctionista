@@ -24,7 +24,7 @@ module.exports = {
   // is to handle the request (add your own logic here as needed)
   handleWithAPI(url) {
     return url.indexOf('/rest/')  === 0 ||
-           url.indexOf('/login')   === 0 ||
+           url.indexOf('/login')  === 0 ||
            url.indexOf('/auth')   === 0 ||
            url.indexOf('/logout') === 0
   }
