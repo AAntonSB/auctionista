@@ -11,6 +11,7 @@ useEffect(() => {
 
   if (isActive) {
     interval = setInterval(() => {
+      //timeleft
       let distance = props.endDate - new Date();
       let days = Math.floor(distance / (1000 * 60 * 60 * 24));
       let hours = Math.floor(
@@ -31,10 +32,16 @@ useEffect(() => {
       } else {
         setIsActive(false);
       }
+
+
       setTimeLeft(time);
-    }, 500);
+      console.log("time left is: " + timeLeft  +" at " + props.id + "at timestamp " + new Date())
+      console.log("time change is: " + time  +" at " + props.id)
+    }, 1000);
   }
+  return () => clearInterval(interval);
 }, [isActive, timeLeft, props.endDate]);
+//[isActive, timeLeft, props.endDate]);
 
 return <span className="myInline myAlignRight">{timeLeft} </span>;
 

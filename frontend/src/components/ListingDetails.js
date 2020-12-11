@@ -22,6 +22,10 @@ const ListingDetails = (props) => {
     }
   }, []);
 
+  useEffect(() => {
+    console.log("listing detail updating")
+  })
+
   async function fetchData() {
     setListing(await listingContext.fetchOneListing(id));
   }
