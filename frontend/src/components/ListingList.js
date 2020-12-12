@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router";
 import { ListingContext } from "../contexts/ListingContextProvider";
 import ListingThumbnail from "./ListingThumbnail";
@@ -7,11 +7,19 @@ import SearchBar from "./SearchBar";
 import { useNotification } from "../providers/NotificationProvider";
 
 const ListingList = (props) => {
+  const [response, setResponse] = useState({});
+
+  const updateResponse = (update) => {
+    setResponse({ ...response, ...update });
+  };
+
   const listingContext = useContext(ListingContext);
-  //const [ListingList, setListingList] = useState([]);
+  const [ListingList, setListingList] = useState([]);
 
   useEffect(async () => {
     await listingContext.fetchAllListings();
+    //let newlists = await fetchAllListings();
+    //setListingList(newlists)
   }, []);
 
   const fetchUser = async () => {
@@ -26,17 +34,37 @@ const ListingList = (props) => {
     }
   };
 
-  useEffect(() => {
-    fetchUser();
-  }, []);
+  const fetchAllListings = async () => {
+    let alllistings = await fetch("/rest/v1/listings");
+    alllistings = await alllistings.json();
+  };
 
+  const searchAllListings = async (searchString) => {
+    let searchresults = await listingContext.getListingsByString(searchString)
+  }
+  /*
+  useEffect(() => {
+    console.log("we hope we see this");
+    console.log(response);
+
+    // if (response.url.includes("error")) {
+    //   console.log("Wrong username/password");
+    // } else {
+    //   console.log("Successfully logged in");
+    //   //fetchUser();
+    //   //props.history.push("/");
+    // }
+  }, [response]);
+  */
+  /*
   useEffect(() => {
     console.log(listingContext.listingList);
   }, [listingContext.listingList]);
+  */
 
   return (
     <div>
-      <SearchBar />
+      <SearchBar setSearchedList={setListingList} />
       <div className="my-grid-layout">
         {listingContext.listingList
           .filter((listing) => listing.endDate > Date.now())

@@ -35,6 +35,18 @@ public class Listing {
     //@JoinColumn(name = "owner_id")
     private List<Image> images;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}) //FetchType.Eager?
+    @JoinColumn(name = "listingId")
+    private List<Bid> bids;
+
+    @ElementCollection(fetch = FetchType.LAZY) //TODO not best practice to use eager
+    @CollectionTable(
+            name="bids",
+            joinColumns=@JoinColumn(name="listingId")
+    )
+    @Column(name="amount")
+    private List<Integer> simplebids;
+
     @Override
     public String toString() {
         return "Listing{" +
@@ -112,4 +124,11 @@ public class Listing {
         this.images = images;
     }
 
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
 }

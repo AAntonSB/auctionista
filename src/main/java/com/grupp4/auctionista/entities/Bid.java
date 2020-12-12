@@ -1,26 +1,37 @@
 package com.grupp4.auctionista.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.UUID;
 
-@Table(name = "bid")
 @Entity
+@Table(name = "bids")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Bid {
+
     @Id
     @GeneratedValue
-    private UUID id;
-    private long amount;
-    private long timestamp;
-    private UUID bidder;
-    private String listing;
+    @JsonIgnore
+    private UUID bidId;
+    //private UUID bidderId;
+    //@JsonIgnore
+    private UUID listingId;
+    private double amount;
+    private Long timestamp;
+
+    @Override
+    public String toString() {
+        return "Bid{" +
+                "bidId=" + bidId +
+                ", listingId=" + listingId +
+                ", amount=" + amount +
+                ", timestamp=" + timestamp +
+                '}';
+    }
 }

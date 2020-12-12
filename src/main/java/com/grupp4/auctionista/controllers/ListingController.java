@@ -2,6 +2,8 @@ package com.grupp4.auctionista.controllers;
 
 import com.grupp4.auctionista.entities.Bid;
 import com.grupp4.auctionista.entities.Listing;
+
+import com.grupp4.auctionista.services.BidService;
 import com.grupp4.auctionista.services.ImageUploadService;
 import com.grupp4.auctionista.services.ListingService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class ListingController {
     ListingService listingService;
 
     @Autowired
+    BidService bidService;
+
+    @Autowired
     private ImageUploadService imageUploadService;
 
     @GetMapping
@@ -34,18 +39,29 @@ public class ListingController {
         return ResponseEntity.ok(listingService.getListingById(id));
     }
 
-    @GetMapping("search/{searchString}")
+    @GetMapping("/search/{searchString}")
     public ResponseEntity<List<Listing>> findListingsBySearchString(@PathVariable String searchString) {
         System.out.println("Listing Controller ");
         return ResponseEntity.ok(listingService.getListingsBySearchString(searchString));
     }
+
+    @GetMapping("/bids/{listingId}")
+    public ResponseEntity<List<Bid>> findBidsWithListingId(@PathVariable UUID listingId){
+        return ResponseEntity.ok(bidService.getBidsByListingId(listingId));
+    }
+
+    @PostMapping("/bids")
+    public ResponseEntity<Bid> saveBid(@Validated @RequestBody Bid bid){
+        return ResponseEntity.ok(bidService.save(bid));
+    }
+
     @PostMapping
     public ResponseEntity<Listing> saveUser(@Validated @RequestBody Listing listing) {
         return ResponseEntity.ok(listingService.save(listing));
     }
 
     @PostMapping(value = "/tripple", consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
-    public void createNewObjectWithImageSecond(
+    public ResponseEntity<Listing> createNewObjectWithImageSecond(
             @RequestPart Listing listing,
             @RequestPart List<MultipartFile> images){
         /*
@@ -67,7 +83,8 @@ public class ListingController {
         System.out.println("after setting images");
         newlisting.setImages(results);
         System.out.println(newlisting);
-        //System.out.println(listingService.getById(newlisting.getId()));
+
+        return ResponseEntity.ok(listingService.getListingById(newlisting.getId()));
 
     }
     /*
@@ -76,6 +93,8 @@ public class ListingController {
         return listingService.getById(id);
     }
      */
+
+
 
     @DeleteMapping("/{id}")
     public void deleteListing(@PathVariable UUID id){
