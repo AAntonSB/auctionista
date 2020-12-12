@@ -7,11 +7,17 @@ import com.grupp4.auctionista.entities.Listing;
 import com.grupp4.auctionista.repositories.BidRepo;
 import com.grupp4.auctionista.repositories.ListingRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
 import javax.annotation.PostConstruct;
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -22,6 +28,10 @@ public class ListingService {
     ListingRepo listingRepo;
     @Autowired
     BidRepo bidRepo;
+    @Autowired
+    BidService bidService;
+    @Autowired
+    UserService userService;
 
     public List<Listing> getAllListings() {
         return listingRepo.findAll();
@@ -33,7 +43,10 @@ public class ListingService {
     }
 
     public Listing save(Listing listing) {
-        return listingRepo.save(listing);
+        var newListing = listingRepo.save(listing);
+        var activeListing = ActiveListings.getInstance();
+        activeListing.addToActiveListingToListing(new ActiveListing(newListing.getId(), newListing.getEndDate()));
+        return newListing;
     }
 
     public void deleteListing(UUID id) {
@@ -45,11 +58,7 @@ public class ListingService {
     }
 
     public List<Listing> getListingsBySearchString(String searchString) {
-
-        List<Listing> listings = listingRepo.findByTitleContainingIgnoreCase(searchString);
-
-        System.out.println(listings);
-        return listings;
+        return listingRepo.findByTitleContainingIgnoreCase(searchString);
     }
 
     private Object getLock(UUID id) {
@@ -57,18 +66,20 @@ public class ListingService {
         return locks.get(id);
     }
 
-    public void createBid(UUID id, Bid bid) {
-        synchronized (getLock(id)) {
-            var listing = getListingById(id);
+    public Bid createBid(UUID listingId, Bid bid) {
+        synchronized (getLock(listingId)) {
+            var listing = getListingById(listingId);
             var now = TimeStampService.getTimestamp();
             if (now >= listing.getEndDate())
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The auction is over");
-//            if (bid.getAmount() <= listing.getHighestBid().getAmount())
-//                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The bid is lower then the current highest bid");
+            if (bidService.getBidsByListingId(listingId).get(0).getAmount() >= bid.getAmount())
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The bid is lower then the current highest bid");
+            if(userService.findCurrentUser().getId().equals(listing.getSellerId()))
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You can't bid on your own listings");
 
             bid.setTimestamp(now);
             bidRepo.save(bid);
-//            listing.setHighestBid(bid);
+            return bid;
         }
     }
 
@@ -83,18 +94,28 @@ public class ListingService {
                 .sorted(Comparator.comparingLong(ActiveListing::getTimestamp)).toArray(ActiveListing[]::new));
     }
 
-//    @PostConstruct
-//    public void checkActiveAuctions() throws InterruptedException {
-//        while(true) {
-//            var activeListings = ActiveListings.getInstance();
-//            long now = TimeStampService.getTimestamp();
-//            System.out.println("hej nu kör vi");
-//
-//            var expiredListings = activeListings.expireListingsFrom(now);
-//            for (UUID expiredListingId : expiredListings) {
-//                var listing = getListingById(expiredListingId);
-//                // make the listings highest bidder the winner
-//            }
-//        }
-//    }
+    @EventListener(ApplicationReadyEvent.class)
+    public void checkActiveAuctions() throws InterruptedException {
+        while(true) {
+            var activeListings = ActiveListings.getInstance();
+            long now = TimeStampService.getTimestamp();
+
+            var expiredListings = activeListings.expireListingsFrom(now);
+            if(expiredListings.isEmpty()) continue;
+            for (UUID expiredListingId : expiredListings) {
+                var listing = getListingById(expiredListingId);
+                var bids = bidService.getBidsByListingId(expiredListingId);
+                var finalBid =  bids.stream().reduce((prev, acc) -> prev.getAmount() > acc.getAmount() ? prev : acc);
+                System.out.println("removing listing: " + listing.getTitle() + " At: " + now);
+                if(finalBid.isEmpty()) {
+                    listing.setPurchaserId(listing.getSellerId());
+                    listingRepo.save(listing);
+                    if(listing.getDescription().equals("Pretty duck")) return;
+                    continue;
+                }
+                listing.setPurchaserId(finalBid.get().getBidId());
+                listingRepo.save(listing);
+            }
+        }
+    }
 }
