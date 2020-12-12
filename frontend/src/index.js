@@ -3,14 +3,25 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import App from "./App";
-import "./socket";
+import NotificationProvider from "./providers/NotificationProvider";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App></App>
+    <NotificationProvider>
+      <App></App>
+    </NotificationProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
+/*
+async function getListings() {
+  let res = await fetch('/rest/v1/listings');
+  res = await res.json();
+  console.log(res);
+}
+
+getListings();
+*/
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

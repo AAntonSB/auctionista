@@ -1,13 +1,10 @@
 package com.grupp4.auctionista.entities;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,8 +21,8 @@ public class Listing {
     @GeneratedValue
 
     private UUID id ;
-    //private UUID sellerId;
-    //private UUID purchaserId;
+    private UUID sellerId;
+    private UUID purchaserId;
     private String title;
     private String description;
     private int reservedPrice;
@@ -37,6 +34,18 @@ public class Listing {
     //@OneToMany(fetch = FetchType.EAGER, mappedBy = "owner", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     //@JoinColumn(name = "owner_id")
     private List<Image> images;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}) //FetchType.Eager?
+    @JoinColumn(name = "listingId")
+    private List<Bid> bids;
+
+    @ElementCollection(fetch = FetchType.LAZY) //TODO not best practice to use eager
+    @CollectionTable(
+            name="bids",
+            joinColumns=@JoinColumn(name="listingId")
+    )
+    @Column(name="amount")
+    private List<Integer> simplebids;
 
     @Override
     public String toString() {
@@ -115,4 +124,11 @@ public class Listing {
         this.images = images;
     }
 
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
 }

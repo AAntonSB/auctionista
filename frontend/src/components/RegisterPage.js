@@ -1,41 +1,42 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import "../css/RegisterModalCss.css";
-import { Modal } from "reactstrap";
 
-const RegisterModal = () => {
+export default function RegisterPage(props) {
 
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [password2, setPassword2] = useState('')
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [password2, setPassword2] = useState('')
+    const myHistory = useHistory()
+    
+    async function springRegister(e) {
+        e.preventDefault()
+        const credentials = {
+          username,
+          password,
+          email
+        }
+      
+        let response = await fetch("/auth/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(credentials)
+        });
+    
+        try {
+          response = await response.json()
+          //setUser(response)
+          props.history.push('/')
+        } catch {
+          console.log('Bad credentials');
+        }
+      }
 
-
-  async function springRegister(e) {
-    e.preventDefault()
-    const credentials = {
-      username,
-      password,
-      email
-    }
-  
-    let response = await fetch("/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(credentials)
-    });
-
-    try {
-      response = await response.json()
-      //setUser(response)
-      //props.history.push('/')
-    } catch {
-      console.log('Bad credentials');
-    }
-  }
-
-  return (
-    <Modal isOpen={true} className="ModalMoves" autoFocus={false}>
-      <button className="close-button topright">x</button>
+    return (
+        <div className="screen">
+        <div className="login-block">
+        <button className="close-button topright">x</button>
       <form>
         <h1>Register</h1>
         <section>
@@ -101,10 +102,14 @@ const RegisterModal = () => {
         </section>
 
         <button onClick={springRegister}>Create account</button>
+        <Link to="/user-login">
         <p className="login-route">Already have an account? click me! </p>
+        </Link>
       </form>
-    </Modal>
-  );
-};
 
-export default RegisterModal;
+
+
+        </div>  
+    </div>
+    )
+}
