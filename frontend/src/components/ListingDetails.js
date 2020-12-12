@@ -1,11 +1,8 @@
 import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router";
-import {} from "reactstrap";
 import { ListingContext } from "../contexts/ListingContextProvider";
-import  { sendMessage, test } from "../socket";
 import "../css/ListingDetails.css";
 import Bidding from "./Bidding";
-import Biddingoriginial from "./Biddingoriginial";
 
 
 const ListingDetails = (props) => {
@@ -16,12 +13,6 @@ const ListingDetails = (props) => {
 
   useEffect(() => {
 
-    const asyncSocket = async () => {
-      test()
-      await sendMessage("dude")
-
-    }
-
 
     fetchData();
     if (listing.images) {
@@ -30,8 +21,6 @@ const ListingDetails = (props) => {
         "/rest/v1/download/" + listing.images[0].filename
       );
     }
-    test()
-    sendMessage("dude")
 
   }, []);
 
