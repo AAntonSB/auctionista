@@ -1,13 +1,10 @@
 package com.grupp4.auctionista.entities;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,8 +21,8 @@ public class Listing {
     @GeneratedValue
 
     private UUID id ;
-    //private UUID sellerId;
-    //private UUID purchaserId;
+    private UUID sellerId;
+    private UUID purchaserId;
     private String title;
     private String description;
     private int reservedPrice;

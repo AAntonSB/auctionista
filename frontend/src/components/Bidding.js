@@ -7,115 +7,50 @@ const Bidding = (props) => {
   const listingContext = useContext(ListingContext);
   const [amount, setAmount] = useState("");
   const [listingBids, setListingBids] = useState([]);
-  const [highestBid, setHighestBid] = useState(props.startingBid)
+  const [highestBid, setHighestBid] = useState(props.startingBid);
   const [numberOfBids, setNumberOfBids] = useState("");
-  
-  useEffect(()=>{
 
-    console.log(props)
-    const fetchmylisting = async () =>{
-      var thislisting = await fetch("/rest/v1/listings" + props.id)
-      console.log(thislisting)
-     }
-    /*
-    async function fetchMyListing() {
-      let mylisting = await fetch("/rest/v1/listings" + props.id)
-      console.log(mylisting)
-    }
-    */
-
-    console.log(props)
+  useEffect(() => {
     fetchData();
-    console.log("after fetch comes listingBids")
-    console.log(listingBids);
-    fetchmylisting();
-  },[props]);
+  }, [props]);
 
-  
-  const fetchmylisting = async () =>{
-    var thislisting = await fetch("/rest/v1/listings" + props.id)
-    console.log(thislisting)
-   }
+  async function fetchData() {
+    setListingBids(await listingContext.getBidsFromListing(props.id));
+  }
 
-
-    async function fetchData() {
-      console.log(await listingContext.getBidsFromListing(props.id));
-      setListingBids(await listingContext.getBidsFromListing(props.id));
+  useEffect(() => {
+    if (listingBids[0]) {
       console.log(listingBids);
+      setHighestBid(listingBids[0].amount);
+      setNumberOfBids(listingBids.length);
+    } else {
+      setHighestBid(props.startingBid);
+      setNumberOfBids("0");
     }
-    /*
-    useEffect(() => {​​
+  }, [listingBids]);
 
-      console.log(listingBids)
-
-            if (listingBids[0]) {​​
-
-              setHighestBid(listingBids[0].amount);
-
-            }​​ else {​​
-
-              setHighestBid(props.startingBid);
-
-            }​​
-
-    }​​,[listingBids]);
-        useEffect(()=>{
-      console.log(listingBids)
-            if (listingBids[0]) {
-              setHighestBid(listingBids[0].amount);
-              setNumberOfBids(listingBids.length)
-            } else {
-              setHighestBid(props.startingBid);
-              setNumberOfBids("0")
-            }
-    },[props]);
-
-    */
-
-    
-    useEffect(()=>{
-      console.log(listingBids)
-            if (listingBids[0]) {
-              setHighestBid(listingBids[0].amount);
-              setNumberOfBids(listingBids.length)
-            } else {
-              setHighestBid(props.startingBid);
-              setNumberOfBids("0")
-            }
-    },[listingBids]);
-  
-
-
-  const createBid = async event => {
-
-    let timestamp = Date.now(); 
+  const createBid = async (event) => {
     let listingId = props.id;
 
-   event.preventDefault();
-     const credentials = {
-       listingId: listingId,
-       amount: amount,
-       timestamp: timestamp
-     };
+    event.preventDefault();
+    const credentials = {
+      listingId: listingId,
+      amount: amount,
+    };
 
-     console.log(credentials);
-        let response = await fetch(
-          "/rest/v1/listings/bids",
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(credentials),
-          }
-        );
+    let response = await fetch(`/rest/v1/listings/${props.id}/bids`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    });
 
-        console.log(response);
-        try {
-          response = await response.json();
-        } catch {
-          console.log("Bad credentials ");
-        }
-        fetchData();
+    try {
+      response = await response.json();
+    } catch {
+      console.error("console log error");
     }
+    fetchData();
+  };
 
   return (
     <div className="payment-block">
@@ -146,6 +81,6 @@ const Bidding = (props) => {
       </div>
     </div>
   );
-}
+};
 
-export default Bidding; 
+export default Bidding;

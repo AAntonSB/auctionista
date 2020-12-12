@@ -1,10 +1,9 @@
 import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router";
-import {} from "reactstrap";
 import { ListingContext } from "../contexts/ListingContextProvider";
 import "../css/ListingDetails.css";
 import Bidding from "./Bidding";
-import Biddingoriginial from "./Biddingoriginial";
+
 
 const ListingDetails = (props) => {
   const listingContext = useContext(ListingContext);
@@ -13,6 +12,8 @@ const ListingDetails = (props) => {
   const id = props.match.params.id;
 
   useEffect(() => {
+
+
     fetchData();
     if (listing.images) {
       console.log(listing);
@@ -20,6 +21,7 @@ const ListingDetails = (props) => {
         "/rest/v1/download/" + listing.images[0].filename
       );
     }
+
   }, []);
 
   useEffect(() => {
