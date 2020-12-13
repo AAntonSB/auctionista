@@ -72,9 +72,14 @@ public class ListingService {
             var now = TimeStampService.getTimestamp();
             if (now >= listing.getEndDate())
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The auction is over");
-            if (bidService.getBidsByListingId(listingId).get(0).getAmount() >= bid.getAmount())
-                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The bid is lower then the current highest bid");
-            if(userService.findCurrentUser().getId().equals(listing.getSellerId()))
+            if (!bidService.getBidsByListingId(listingId).isEmpty()) {
+                if (bidService.getBidsByListingId(listingId).get(0).getAmount() >= bid.getAmount())
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The bid is lower then the current highest bid");
+            } else {
+                if(listing.getStartingBid() >= bid.getAmount())
+                    throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "The bid is lower then the starting bid");
+            }
+            if (userService.findCurrentUser().getId().equals(listing.getSellerId()))
                 throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "You can't bid on your own listings");
 
             bid.setTimestamp(now);
@@ -96,21 +101,21 @@ public class ListingService {
 
     @EventListener(ApplicationReadyEvent.class)
     public void checkActiveAuctions() throws InterruptedException {
-        while(true) {
+        while (true) {
             var activeListings = ActiveListings.getInstance();
             long now = TimeStampService.getTimestamp();
 
             var expiredListings = activeListings.expireListingsFrom(now);
-            if(expiredListings.isEmpty()) continue;
+            if (expiredListings.isEmpty()) continue;
             for (UUID expiredListingId : expiredListings) {
                 var listing = getListingById(expiredListingId);
                 var bids = bidService.getBidsByListingId(expiredListingId);
-                var finalBid =  bids.stream().reduce((prev, acc) -> prev.getAmount() > acc.getAmount() ? prev : acc);
+                var finalBid = bids.stream().reduce((prev, acc) -> prev.getAmount() > acc.getAmount() ? prev : acc);
                 System.out.println("removing listing: " + listing.getTitle() + " At: " + now);
-                if(finalBid.isEmpty()) {
+                if (finalBid.isEmpty()) {
                     listing.setPurchaserId(listing.getSellerId());
                     listingRepo.save(listing);
-                    if(listing.getDescription().equals("Pretty duck")) return;
+                    if (listing.getDescription().equals("Pretty duck")) return;
                     continue;
                 }
                 listing.setPurchaserId(finalBid.get().getBidId());
