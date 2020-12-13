@@ -1,8 +1,9 @@
 import React, { useEffect, useContext, useState } from "react";
 import { withRouter } from "react-router";
-import {} from "reactstrap";
 import { ListingContext } from "../contexts/ListingContextProvider";
 import "../css/ListingDetails.css";
+import Bidding from "./Bidding";
+
 
 const ListingDetails = (props) => {
   const listingContext = useContext(ListingContext);
@@ -11,6 +12,8 @@ const ListingDetails = (props) => {
   const id = props.match.params.id;
 
   useEffect(() => {
+
+
     fetchData();
     if (listing.images) {
       console.log(listing);
@@ -18,7 +21,12 @@ const ListingDetails = (props) => {
         "/rest/v1/download/" + listing.images[0].filename
       );
     }
+
   }, []);
+
+  useEffect(() => {
+    console.log("listing detail updating")
+  })
 
   async function fetchData() {
     setListing(await listingContext.fetchOneListing(id));
@@ -32,33 +40,33 @@ const ListingDetails = (props) => {
     }
   }, [listing]);
 
-  const DisplayEndTime = () => {
-    let uni = new Date(listing.endDate * 1000);
-    let months = [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
-    ];
-    let month = months[uni.getMonth()];
-    let date = uni.getDate();
-    let hour = uni.getHours();
-    let min = uni.getMinutes();
-    return (
-      <>
-        {date} {month}{" "}
-        {(hour.toString().length <= 2 ? "0" + hour :  hour) + ":" + min}
-      </>
-    );
-  };
+  // const DisplayEndTime = () => {
+  //   let uni = new Date(listing.endDate * 1000);
+  //   let months = [
+  //     "Jan",
+  //     "Feb",
+  //     "Mar",
+  //     "Apr",
+  //     "May",
+  //     "Jun",
+  //     "Jul",
+  //     "Aug",
+  //     "Sep",
+  //     "Oct",
+  //     "Nov",
+  //     "Dec",
+  //   ];
+  //   let month = months[uni.getMonth()];
+  //   let date = uni.getDate();
+  //   let hour = uni.getHours();
+  //   let min = uni.getMinutes();
+  //   return (
+  //     <>
+  //       {date} {month}{" "}
+  //       {(hour.toString().length <= 2 ? "0" + hour :  hour) + ":" + min}
+  //     </>
+  //   );
+  // };
 
   return (
     <div className="item-details-body">
@@ -81,7 +89,8 @@ const ListingDetails = (props) => {
           <p>{listing.description}</p>
         </div>
       </div>
-      <div className="payment-block">
+      <Bidding {...listing}/>
+      {/* <div className="payment-block">
         <div className="starting-price">
           <p className="payment-cursive-text center-text">Starting price</p>
           <p className="payment-regular-text center-text">
@@ -100,7 +109,7 @@ const ListingDetails = (props) => {
           <p className="payment-regular-text">bids {"0"}</p>
         </div>
         <div className="payment-component">Place payment component here</div>
-      </div>
+      </div> */}
     </div>
   );
 };

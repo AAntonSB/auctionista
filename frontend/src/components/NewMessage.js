@@ -5,7 +5,8 @@ import {send, sendMessage, connect, data} from '../socket.js'
 const NewMessage = () => {
   const [newMessage, setNewMessage] = useState();
 
-  const SendNewMessage = async (message) => {
+  const SendNewMessage = async (e, message) => {
+    e.preventDefault() 
     let newMessage = {
       sender: "anon",
       content: message,
@@ -35,7 +36,7 @@ const NewMessage = () => {
           setNewMessage(e.target.value);
         }}
       />
-      <button onClick={() => { SendNewMessage(newMessage) }}>Send</button>
+      <button onClick={(e) => {SendNewMessage(newMessage) }}>Send</button>
     </form>
   );
 };
