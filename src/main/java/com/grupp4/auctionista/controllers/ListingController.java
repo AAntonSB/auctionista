@@ -77,11 +77,13 @@ public class ListingController {
         return ResponseEntity.ok(listingService.getListingsBySearchString(searchString));
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<List<Listing>> findUsersListings(@PathVariable UUID id) {
-        return ResponseEntity.ok(listingService.getUserListings(id));
-    }
-
+    @Operation(summary = "Returns an array of all listings posted by the user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found listings",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Listing.class))
+                    })
+    })
     @GetMapping("/user")
     public ResponseEntity<List<Listing>> findUsersListings() {
         var postingUser = userService.findCurrentUser().getId();
@@ -120,18 +122,6 @@ public class ListingController {
         return ResponseEntity.ok(listingService.createBid(listingId, bid));
     }
 
-    @Operation(summary = "saves the listing")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Listing saved",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Listing.class))
-                    })
-    })
-    @PostMapping
-    public ResponseEntity<Listing> saveListing(@Validated @RequestBody Listing listing) {
-        return ResponseEntity.ok(listingService.save(listing));
-    }
-
     @Operation(summary = "FIX THE POSTMAPPING ROUTE AND HTTP RETURNS")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Image saved",
@@ -139,7 +129,7 @@ public class ListingController {
                             schema = @Schema(implementation = Listing.class))
                     })
     })
-    @PostMapping(value = "/tripple", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Listing> createNewObjectWithImageSecond(
             @RequestPart Listing listing,
             @RequestPart List<MultipartFile> images){

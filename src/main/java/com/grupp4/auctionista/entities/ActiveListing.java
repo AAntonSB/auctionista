@@ -7,12 +7,17 @@ import lombok.NoArgsConstructor;
 import java.util.UUID;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class ActiveListing {
     private UUID id;
     private long timestamp;
 
+    public ActiveListing() {
+    }
+
+    public ActiveListing(UUID id, long timestamp) {
+        this.id = id;
+        this.timestamp = timestamp;
+    }
 
     public UUID getId() {
         return id;

@@ -50,7 +50,7 @@ public class ActiveListings {
         return result;
     }
 
-    public void addToActiveListingToListing(ActiveListing activeListing){
+    public void addListingToActiveListing(ActiveListing activeListing){
         activeListings = addTo(activeListings, activeListing);
     }
 

@@ -20,6 +20,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 @Service
 public class ListingService {
@@ -113,8 +114,13 @@ public class ListingService {
             if (expiredListings.isEmpty()) continue;
             for (UUID expiredListingId : expiredListings) {
                 var listing = getListingById(expiredListingId);
+                // listing = expired listing
                 var bids = bidService.getBidsByListingId(expiredListingId);
-                var finalBid =  bids.stream().reduce((prev, acc) -> prev.getAmount() > acc.getAmount() ? prev : acc);
+                // bids = the corresponding bids for the expired listing
+                var finalBid =  bids.stream().reduce((prev, acc) -> prev.getAmount() > acc.getAmount() ? prev : acc).stream().collect(Collectors.toList());
+                //System.out.println(finalBid);
+                //System.out.println(finalBid.get(0).getAmount());
+                //final bid,
 
                 if(finalBid.isEmpty()) {
                     listing.setPurchaserId(listing.getSellerId());
@@ -123,13 +129,13 @@ public class ListingService {
                 }
 
                 var minimumReservedPrice = 0;
-                if(listing.getReservedPrice() <= minimumReservedPrice || finalBid.get().getAmount() > listing.getReservedPrice()){
+                if(listing.getReservedPrice() <= minimumReservedPrice || finalBid.get(0).getAmount() < listing.getReservedPrice()){
                     listing.setPurchaserId(listing.getSellerId());
                     listingRepo.save(listing);
                     continue;
                 }
 
-                listing.setPurchaserId(finalBid.get().getBidId());
+                listing.setPurchaserId(finalBid.get(0).getBidId());
                 listingRepo.save(listing);
             }
         }
