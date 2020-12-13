@@ -5,12 +5,17 @@ import { ListingContext } from "../contexts/ListingContextProvider";
 import "../css/Listings.css";
 
 const SearchBar = (props) => {
-  const [searchString, setSearchString] = useState([]);
+  const [searchString, setSearchString] = useState("");
   const listingContext = useContext(ListingContext);
 
   const findListings = async () => {
     
-   let listings = await listingContext.getListingsByString(searchString); 
+    let listings;
+    if(searchString){
+      listings = await listingContext.getListingsByString(searchString);
+    }else{
+      await listingContext.fetchAllListings();
+    }
     
    console.log(listings);
 

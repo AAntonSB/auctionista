@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { Router, Route, Switch, BrowserRouter } from "react-router-dom";
 
 import "./App.css";
 import MessageContext from "./contexts/MessageContextProvider";

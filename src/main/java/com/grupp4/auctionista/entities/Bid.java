@@ -24,6 +24,7 @@ public class Bid {
     private UUID listingId;
     private double amount;
     private Long timestamp;
+    private UUID bidder;
 
     @Override
     public String toString() {
@@ -32,6 +33,47 @@ public class Bid {
                 ", listingId=" + listingId +
                 ", amount=" + amount +
                 ", timestamp=" + timestamp +
+                ", bidder=" + bidder +
                 '}';
+    }
+
+    public UUID getListingId() {
+        return listingId;
+    }
+
+    public void setListingId(UUID listingId) {
+        this.listingId = listingId;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public UUID getBidder() {
+        return bidder;
+    }
+
+    public void setBidder(UUID bidder) {
+        this.bidder = bidder;
+    }
+
+    public UUID getBidId() {
+        return bidId;
+    }
+
+    public void setBidId(UUID bidId) {
+        this.bidId = bidId;
     }
 }

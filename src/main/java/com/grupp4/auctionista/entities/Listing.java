@@ -1,13 +1,10 @@
 package com.grupp4.auctionista.entities;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,14 +21,13 @@ public class Listing {
     @GeneratedValue
 
     private UUID id ;
-    //private UUID sellerId;
-    //private UUID purchaserId;
+    private UUID sellerId;
+    private UUID purchaserId;
     private String title;
     private String description;
     private int reservedPrice;
     private int startingBid;
     private Long endDate;
-    private UUID seller;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE}) //FetchType.Eager?
     @JoinColumn(name = "owner_id")
@@ -137,11 +133,19 @@ public class Listing {
         this.bids = bids;
     }
 
-    public UUID getSeller() {
-        return seller;
+    public UUID getSellerId() {
+        return sellerId;
     }
 
-    public void setSeller(UUID seller) {
-        this.seller = seller;
+    public void setSellerId(UUID sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public UUID getPurchaserId() {
+        return purchaserId;
+    }
+
+    public void setPurchaserId(UUID purchaserId) {
+        this.purchaserId = purchaserId;
     }
 }

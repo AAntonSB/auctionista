@@ -11,5 +11,5 @@ import java.util.UUID;
 public interface ListingRepo extends JpaRepository<Listing, UUID> {
     List<Listing> findByTitleContainingIgnoreCase(String searchString);
 
-    List<Listing> findBySeller(UUID id);
+    List<Listing> findBySellerId(UUID id);
 }

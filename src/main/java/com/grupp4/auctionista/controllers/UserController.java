@@ -1,5 +1,6 @@
 package com.grupp4.auctionista.controllers;
 
+import com.grupp4.auctionista.entities.Listing;
 import com.grupp4.auctionista.entities.User;
 import com.grupp4.auctionista.services.UserService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,12 +31,18 @@ public class UserController {
                             schema = @Schema(implementation = User.class))
                     }),
             @ApiResponse(responseCode = "404", description = "Failed to find users", content = @Content)})
-
     @GetMapping("/rest/v1/user")
     public ResponseEntity<List<User>> findAllUsers() {
         return ResponseEntity.ok(userService.findAll());
     }
 
+    @Operation(summary = "return the active user")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found active user",
+                    content = {@Content(mediaType = "application/json",
+                            schema = @Schema(implementation = Listing.class))
+                    })
+    })
     @GetMapping("/auth/whoami")
     public String whoami(){
 
@@ -73,12 +80,6 @@ public class UserController {
                             schema = @Schema(implementation = User.class))
                     }),
             @ApiResponse(responseCode = "400", description = "Failed to create user", content = @Content)})
-
-    @PostMapping("/rest/v1/user/")
-    public ResponseEntity<User> registerUser(@RequestBody User user){
-        return ResponseEntity.ok(userService.saveUser(user));
-    }
-
     @PostMapping("/auth/register")
     public User addUser(@RequestBody User user){
             return userService.registerUser(user);
