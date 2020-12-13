@@ -19,8 +19,7 @@ public class Bid {
     @GeneratedValue
     @JsonIgnore
     private UUID bidId;
-    //private UUID bidderId;
-    //@JsonIgnore
+    
     private UUID listingId;
     private double amount;
     private Long timestamp;
