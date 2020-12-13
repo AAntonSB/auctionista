@@ -39,11 +39,15 @@ public class ListingService {
         return listingRepo.findById(id);
     }
 
+    public List<Listing> getUserListings(UUID id) {
+        return listingRepo.findBySeller(id);
+    }
+
     public List<Listing> getListingsBySearchString(String searchString) {
 
         List<Listing> listings = listingRepo.findByTitleContainingIgnoreCase(searchString);
 
-        System.out.println(listings);
+        //System.out.println(listings);
         return listings;
     }
 }

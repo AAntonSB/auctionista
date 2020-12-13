@@ -3,9 +3,11 @@ package com.grupp4.auctionista.controllers;
 import com.grupp4.auctionista.entities.Bid;
 import com.grupp4.auctionista.entities.Listing;
 
+import com.grupp4.auctionista.entities.User;
 import com.grupp4.auctionista.services.BidService;
 import com.grupp4.auctionista.services.ImageUploadService;
 import com.grupp4.auctionista.services.ListingService;
+import com.grupp4.auctionista.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,9 @@ public class ListingController {
     BidService bidService;
 
     @Autowired
+    UserService userService;
+
+    @Autowired
     private ImageUploadService imageUploadService;
 
     @GetMapping
@@ -44,6 +49,19 @@ public class ListingController {
     public ResponseEntity<List<Listing>> findListingsBySearchString(@PathVariable String searchString) {
         System.out.println("Listing Controller ");
         return ResponseEntity.ok(listingService.getListingsBySearchString(searchString));
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<Listing>> findUsersListings(@PathVariable UUID id) {
+        System.out.println("Listing Controller ");
+        return ResponseEntity.ok(listingService.getUserListings(id));
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<List<Listing>> findUsersListings() {
+        //System.out.println("Listing Controller ");
+        var postingUser = userService.findCurrentUser().getId();
+        return ResponseEntity.ok(listingService.getUserListings(postingUser));
     }
 
     @GetMapping("/bids/{listingId}")
@@ -73,17 +91,22 @@ public class ListingController {
         and
         curl -X POST "http://localhost:4037/rest/v1/listings/double" -F "images=@./talgoxe.jpg;type=image/jpeg" -F "stringtest={\"first\":\"White\"};type=application/json;charset=utf-8"
          */
-        System.out.println(listing);
+        //System.out.println(listing);
+
+        User postingUser = userService.findCurrentUser();
+
+        listing.setSeller(postingUser.getId());
+
+        System.out.println("User uploading listing");
+        System.out.println(postingUser.getUsername());
+        System.out.println("User ID uploading listing");
+        System.out.println(postingUser.getId());
+
         var newlisting = listingService.save(listing);
-        System.out.println(newlisting);
-        System.out.println(images);
+;
         var results = imageUploadService.handleFileUpload(images, newlisting.getId());
-        System.out.println(results);
-        System.out.println("After saving pics");
-        System.out.println(newlisting);
-        System.out.println("after setting images");
+
         newlisting.setImages(results);
-        System.out.println(newlisting);
 
         return ResponseEntity.ok(listingService.getListingById(newlisting.getId()));
 

@@ -37,8 +37,20 @@ public class UserController {
     }
 
     @GetMapping("/auth/whoami")
-    public User whoami(){
-        return userService.findCurrentUser();
+    public String whoami(){
+
+        var user = userService.findCurrentUser();
+
+        try {
+            System.out.println("trying to get username");
+            var username = user.getUsername();
+            System.out.println("username is: " + username);
+            return username;
+        }
+        catch(Exception e) {
+            System.out.println("no such user");
+            return "no such user";
+        }
     }
 
     @Operation(summary = "Finds user by id")

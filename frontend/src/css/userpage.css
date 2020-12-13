@@ -1,0 +1,68 @@
+.display-image {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    grid-area: image; }
+.listing-text { grid-area: listingtext; }
+.highest-bidder { grid-area: highestbidder; }
+.current-bid { grid-area: currentbid; }
+.time-ending { grid-area: endtime; }
+.number-of-bids { grid-area: bids; }
+
+.center-my-text {
+    text-align: center;
+}
+
+.center-by-flex {
+     
+  margin-right: auto;
+  margin-left: auto;
+}
+
+
+.user-listings-grid-container {
+
+    margin:auto;
+    width: 50%;
+    display: grid;
+    grid-template-areas:
+    'endtime endtime bids currentbid highestbidder'
+    'image listingtext listingtext listingtext listingtext';
+  
+    grid-gap: 10px;
+    padding: 10px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1)
+}
+
+/*
+.grid-container {
+  display: grid;
+  grid-template-areas:
+  'header header header header header header'
+  'menu main main main right right'
+  'menu footer footer footer footer footer';
+  grid-gap: 10px;
+  background-color: #2196F3;
+  padding: 10px;
+}
+*/
+
+img.a {
+    width: 200px;
+    height: 400px;
+    object-fit: cover;
+  }
+
+img.object-fit-contains{
+    margin:auto;
+    height: 142px;
+    width: 142px;
+    object-fit: contain;
+}
+
+.user-listings-grid-container > div {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.emergency-fix {
+}

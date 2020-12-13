@@ -25,6 +25,7 @@ const LoginPage = (props) => {
 
     if (response.url.includes("error")) {
       console.log("Wrong username/password");
+      console.log(response)
     } else {
       //console.log("Successfully logged in");
       fetchUser();

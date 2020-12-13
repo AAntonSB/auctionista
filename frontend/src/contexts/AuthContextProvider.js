@@ -7,10 +7,21 @@ export default function AuthContextProvider(props) {
 
   const fetchUser = async () => {
     let res = await fetch('/auth/whoami')
+    //let text = await res.text()
+    //console.log("response :" + text)
     try {
-      res = await res.json()
-      setUser(res)
-      console.log(res);
+      let text = await res.text()
+      //res = await res.json()
+      //console.log(text);
+      if (text !== "no such user"){
+        setUser(text)
+        console.log(text);
+        console.log(user)
+      } else {
+        console.log('Not authenticated')
+      }
+      //setUser(text)
+      //console.log(text);
     } catch {
       console.log('Not authenticated');
     }
