@@ -37,6 +37,7 @@ public class Listing {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE}) //FetchType.Eager?
     @JoinColumn(name = "listingId")
+    @OrderBy("amount DESC")
     private List<Bid> bids;
 
     @ElementCollection(fetch = FetchType.LAZY) //TODO not best practice to use eager
@@ -130,5 +131,21 @@ public class Listing {
 
     public void setBids(List<Bid> bids) {
         this.bids = bids;
+    }
+
+    public UUID getSellerId() {
+        return sellerId;
+    }
+
+    public void setSellerId(UUID sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public UUID getPurchaserId() {
+        return purchaserId;
+    }
+
+    public void setPurchaserId(UUID purchaserId) {
+        this.purchaserId = purchaserId;
     }
 }

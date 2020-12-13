@@ -2,6 +2,9 @@ package com.grupp4.auctionista.controllers;
 
 import com.grupp4.auctionista.entities.Bid;
 import com.grupp4.auctionista.entities.Listing;
+
+import com.grupp4.auctionista.entities.User;
+import com.grupp4.auctionista.services.UserService;
 import com.grupp4.auctionista.services.BidService;
 import com.grupp4.auctionista.services.ImageUploadService;
 import com.grupp4.auctionista.services.ListingService;
@@ -31,6 +34,9 @@ public class ListingController {
 
     @Autowired
     BidService bidService;
+
+    @Autowired
+    UserService userService;
 
     @Autowired
     private ImageUploadService imageUploadService;
@@ -71,6 +77,17 @@ public class ListingController {
         return ResponseEntity.ok(listingService.getListingsBySearchString(searchString));
     }
 
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<Listing>> findUsersListings(@PathVariable UUID id) {
+        return ResponseEntity.ok(listingService.getUserListings(id));
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<List<Listing>> findUsersListings() {
+        var postingUser = userService.findCurrentUser().getId();
+        return ResponseEntity.ok(listingService.getUserListings(postingUser));
+    }
+
     @Operation(summary = "Returns an array of bids, sorted desc by bid amount for the given listing id")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Found bids",
@@ -94,9 +111,13 @@ public class ListingController {
             @ApiResponse(responseCode = "400", description = "The auction is over / The bid is lower then the current highest bid / You can't bid on your own listings", content = @Content),
             @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
 })
-    @PostMapping("/{id}/bids")
-    public ResponseEntity<Bid> saveBid(@Validated @PathVariable UUID id, @RequestBody Bid bid) {
-        return ResponseEntity.ok(listingService.createBid(id, bid));
+    @PostMapping("/{listingId}/bids")
+    public ResponseEntity<Bid> saveBid(@PathVariable UUID listingId, @RequestBody Bid bid) {
+        User postingUser = userService.findCurrentUser();
+
+        bid.setListingId(listingId);
+        bid.setBidder(postingUser.getId());
+        return ResponseEntity.ok(listingService.createBid(listingId, bid));
     }
 
     @Operation(summary = "saves the listing")
@@ -121,7 +142,11 @@ public class ListingController {
     @PostMapping(value = "/tripple", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Listing> createNewObjectWithImageSecond(
             @RequestPart Listing listing,
-            @RequestPart List<MultipartFile> images) {
+            @RequestPart List<MultipartFile> images){
+
+        User postingUser = userService.findCurrentUser();
+
+        listing.setSellerId(postingUser.getId());
 
         var newlisting = listingService.save(listing);
         var results = imageUploadService.handleFileUpload(images, newlisting.getId());

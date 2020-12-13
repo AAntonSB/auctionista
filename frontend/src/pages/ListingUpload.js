@@ -54,14 +54,16 @@ const ListingUpload = (props) => {
     method: "post",
     body: formData });
 
+    let mydata;
+
   try {
-    let mydata = await data.json();
+    mydata = await data.json();
     console.log(mydata);
     props.history.push("/listing-details/" + mydata.id);
     } catch (err) {
       console.log(err)
     console.log("Bad credentials");
-    console.log(data);
+    console.log(mydata);
     }
 
 

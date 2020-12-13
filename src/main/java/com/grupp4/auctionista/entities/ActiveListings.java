@@ -20,6 +20,22 @@ public class ActiveListings {
 
     private ActiveListing[] activeListings;
 
+    public static ActiveListings getSingle_instance() {
+        return single_instance;
+    }
+
+    public static void setSingle_instance(ActiveListings single_instance) {
+        ActiveListings.single_instance = single_instance;
+    }
+
+    public ActiveListing[] getActiveListings() {
+        return activeListings;
+    }
+
+    public void setActiveListings(ActiveListing[] activeListings) {
+        this.activeListings = activeListings;
+    }
+
     public List<UUID> expireListingsFrom(long now) {
         ArrayList<UUID> result = new ArrayList<>();
 

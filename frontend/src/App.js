@@ -13,6 +13,7 @@ import ListingList from "./components/ListingList";
 import About from "./components/About";
 import LoginPage from "./components/LoginPage"
 import RegisterPage from "./components/RegisterPage";
+import UserPage from "./pages/UserPage";
 import { useNotification } from "./providers/NotificationProvider";
 
 function App() {
@@ -46,6 +47,7 @@ function App() {
               <Route exact path="/about" component={About} />
               <Route exact path="/user-login" component={LoginPage} />
               <Route exact path="/register" component={RegisterPage} />
+              <Route exact path="/userpage" component={UserPage}/>
             </Switch>
           </MessageContext>
         </ListingContext>

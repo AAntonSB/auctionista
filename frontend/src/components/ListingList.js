@@ -18,6 +18,7 @@ const ListingList = (props) => {
 
   useEffect(async () => {
     await listingContext.fetchAllListings();
+    console.log(listingContext.listingList)
     //let newlists = await fetchAllListings();
     //setListingList(newlists)
   }, []);

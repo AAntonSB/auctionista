@@ -77,6 +77,9 @@ const Header = () => {
             <Link to="/upload-listing" className="navlink">
               <li>Make listing</li>
             </Link>)}
+            {user && (<Link to="/userpage" className="navlink">
+              <li>My listings</li>
+            </Link>)}
             {user && (<Link to="/" className="navlink">
               <li onClick={logout}>Logout</li>
             </Link>)}

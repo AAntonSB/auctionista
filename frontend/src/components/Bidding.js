@@ -34,11 +34,10 @@ const Bidding = (props) => {
 
     event.preventDefault();
     const credentials = {
-      listingId: listingId,
       amount: amount,
     };
 
-    let response = await fetch(`/rest/v1/listings/${props.id}/bids`, {
+    let response = await fetch("/rest/v1/listings/" + listingId + "/bids", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(credentials),
