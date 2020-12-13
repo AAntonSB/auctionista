@@ -45,7 +45,7 @@ public class ListingService {
     public Listing save(Listing listing) {
         var newListing = listingRepo.save(listing);
         var activeListing = ActiveListings.getInstance();
-        activeListing.addToActiveListingToListing(new ActiveListing(newListing.getId(), newListing.getEndDate()));
+        activeListing.addListingToActiveListing(new ActiveListing(newListing.getId(), newListing.getEndDate()));
         return newListing;
     }
 
@@ -114,14 +114,21 @@ public class ListingService {
             for (UUID expiredListingId : expiredListings) {
                 var listing = getListingById(expiredListingId);
                 var bids = bidService.getBidsByListingId(expiredListingId);
-                var finalBid = bids.stream().reduce((prev, acc) -> prev.getAmount() > acc.getAmount() ? prev : acc);
-                System.out.println("removing listing: " + listing.getTitle() + " At: " + now);
-                if (finalBid.isEmpty()) {
+                var finalBid =  bids.stream().reduce((prev, acc) -> prev.getAmount() > acc.getAmount() ? prev : acc);
+
+                if(finalBid.isEmpty()) {
                     listing.setPurchaserId(listing.getSellerId());
                     listingRepo.save(listing);
-                    if (listing.getDescription().equals("Pretty duck")) return;
                     continue;
                 }
+
+                var minimumReservedPrice = 0;
+                if(listing.getReservedPrice() <= minimumReservedPrice || finalBid.get().getAmount() > listing.getReservedPrice()){
+                    listing.setPurchaserId(listing.getSellerId());
+                    listingRepo.save(listing);
+                    continue;
+                }
+
                 listing.setPurchaserId(finalBid.get().getBidId());
                 listingRepo.save(listing);
             }
